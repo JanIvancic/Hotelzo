@@ -11,33 +11,45 @@ Sav programski kod potrebno je verzionirati u glavnoj **master** grani i **obvez
 
 Nakon vaše prijave bit će vam dodijeljen mentor s kojim ćete tijekom semestra raditi na ovom projektu. Mentor će vam slati povratne informacije kroz sekciju Discussions također dostupnu na GitHubu vašeg projekta. A sada, vrijeme je da prijavite vaš projekt. Za prijavu vašeg projektnog prijedloga molimo vas koristite **predložak** koji je naveden u nastavku, a započnite tako da kliknete na *olovku* u desnom gornjem kutu ovoga dokumenta :) 
 
-# Naziv projekta
-(u redak iznad navedite kratki proizvoljni naziv projekta prikladan akademskoj zajednici, a ovaj tekst kao i uvodni tekst iznad obrišite)
+# Aplikacija za rezervaciju soba hotela
 
 ## Projektni tim
-(svi članovi tima moraju biti iz iste seminarske grupe)
 
 Ime i prezime | E-mail adresa (FOI) | JMBAG | Github korisničko ime | Seminarska grupa
 ------------  | ------------------- | ----- | --------------------- | ----------------
-Ime i prezime | mojaadresa@foi.hr | 000000000 | githubuser | G01
-Ime i prezime | ... | ... | ... | ...
+Mladen Kajić | mkajic20@student.foi.hr | 0016147999 | mkajic20 | IPS3-S-G1.1
+Luka Galjer | lgaljer20@student.foi.hr | 0016148489 | lgaljer20 | IPS3-S-G1.1
+Jan Ivančić | jivancic20@student.foi.hr | 0016150494 | jivancic20 | IPS3-S-G1.1
 
 ## Opis domene
-Umjesto ovih uputa opišite domenu ili problem koji pokrivate vašim projektom. Domena može biti proizvoljna, ali obratite pozornost da sukladno ishodima učenja, domena omogući primjenu zahtijevanih koncepata kako je to navedeno u sljedećem poglavlju. Priložite odgovarajuće skice gdje je to prikladno.
+
+Aplikacija je namijenjena za rezervaciju hotelske sobe. Aplikacija će pružiti osnovne informaijce o hotelu i sobama, nuditi će opcije rezeviranja sobe te promjenu i otkazivanje rezervacija. Korisnik će također moći ostaviti recenziju hotela.
+
+
 
 ## Specifikacija projekta
 Umjesto ovih uputa opišite zahtjeve za funkcionalnošću mobilne aplikacije ili aplikacije za pametne uređaje. Pobrojite osnovne funkcionalnosti i za svaku naznačite ime odgovornog člana tima. Opišite osnovnu buduću arhitekturu programskog proizvoda. Obratite pozornost da mobilne aplikacije često zahtijevaju pozadinske servise. Također uzmite u obzir da bi svaki član tima trebao biti odgovoran za otprilike 3 funkcionalnosti, te da bi opterećenje članova tima trebalo biti ujednačeno. Priložite odgovarajuće dijagrame i skice gdje je to prikladno. Funkcionalnosti sustava bobrojite u tablici ispod koristeći predložak koji slijedi:
 
 Oznaka | Naziv | Kratki opis | Odgovorni član tima
 ------ | ----- | ----------- | -------------------
-F01 | Login | Za pristup dnevniku potrebnba je autentikacija korisnika pomoću login funkcionalnosti. Korisnik se logira s podacima koji su mu dodijeljeni prilikom ... | Zlatko Stapić
-F02 | Pregled dnevnika | .... | ...
+F01 | Registracija | Kako bi korisnik mogao pristupiti aplikaciji, prvo se mora registrirati | -
+F02 | Login | Za pristup funkcionalnostima aplikacije, korisnik će se trebati prijaviti u sustav | -
+F03 | Oporavak lozinke | U slučaju zaboravljanja lozinke, korisnik može zahtijevati oporavak lozinke te će mu tada na mail doći kontrolni kod koji će unijeti u aplikaciju sa novom lozinkom | -
+F04 | Filtriranje soba | Aplikacija će korisniku omogućiti filtriranje soba | -
+F05 | Pregled sobe | Aplikacija će korisniku omogućiti da pregleda informacije o sobi | -
+F06 | Rezervacije | Aplikacija će korisniku omogućiti rezerviranje sobe u željenom terminu, promjenu te otkazivanje rezervacija | -
+F07 | Potvrda rezervacije | Slanje obavijesti na mail o rezerviranju sobe, promjeni rezervacije i otkazivanju rezervacije | -
+F08 | Recenzije | Korisnik će moći ostaviti recenziju hotela, te vidjeti ostale recenzije | -
+F09 | Promjena izgleda aplikacije | Korisnik će moći mijenjati temu aplikacije (svijetla i tamna tema) | -
 
 ## Tehnologije i oprema
+
+Za implementaciju aplikacije koristiti ćemo Android Studio te Kotlin programski jezik. Za verzioniranje softvera koristiti ćemo Git i GitHub. 
+
 Umjesto ovih uputa jasno popišite sve tehnologije, alate i opremu koju ćete koristiti pri implementaciji vašeg rješenja. Vaše rješenje može biti implementirano u bilo kojoj tehnologiji za razvoj mobilnih aplikacija ili aplikacija za pametne uređaje osim u hibridnim web tehnologijama kao što su React Native ili HTML+CSS+JS. Tehnologije koje ćete koristiti bi trebale biti javno dostupne, a ako ih ne budemo obrađivali na vježbama u vašoj dokumentaciji ćete morati navesti način preuzimanja, instaliranja i korištenja onih tehnologija koje su neopbodne kako bi se vaš programski proizvod preveo i pokrenuo. Pazite da svi alati koje ćete koristiti moraju imati odgovarajuću licencu. Što se tiče zahtjeva nastavnika, obvezno je koristiti git i GitHub za verzioniranje programskog koda, GitHub Wiki za pisanje jednostavne dokumentacije sukladno uputama mentora, a projektne zadatke je potrebno planirati i pratiti u alatu GitHub projects.
 
 ## Baza podataka i web server
-Nastavnici vam mogu pripremiti MySQL bazu podataka i web server na kojem možete postaviti jednostavne php web servise. Ako želite da vam pripremimo ove sustave obavezno to navedite umjesto ovog teksta s napomenom "Trebamo bazu podataka i pristup serveru za PHP skripte". Alternativno, možete koristiti bilo koji online dostupan sustav kao i studentske licence na pojedinim platformama kao što su Heroku ili Azure.
+Trebamo bazu podataka i pristup serveru za PHP skripte.
 
 ## .gitignore
 Uzmite u obzir da je u mapi Software .gitignore konfiguriran za nekoliko tehnologija, ali samo ako će projekti biti smješteni direktno u mapu Software ali ne i u neku pod mapu. Nakon odabira konačne tehnologije i projekta obavezno dopunite/premjestite gitignore kako bi vaš projekt zadovoljavao kriterije koji su opisani u ReadMe.md dokumentu dostupnom u mapi Software.
