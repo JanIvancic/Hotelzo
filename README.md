@@ -31,15 +31,15 @@ Aplikacija je namijenjena za rezervaciju hotelske sobe. Aplikacija će pružiti 
 
 Oznaka | Naziv | Kratki opis | Odgovorni član tima
 ------ | ----- | ----------- | -------------------
-F01 | Registracija | Kako bi korisnik mogao pristupiti aplikaciji, prvo se mora registrirati | -
-F02 | Login | Za pristup funkcionalnostima aplikacije, korisnik će se trebati prijaviti u sustav | -
-F03 | Oporavak lozinke | U slučaju zaboravljanja lozinke, korisnik može zahtijevati oporavak lozinke te će mu tada na mail doći kontrolni kod koji će unijeti u aplikaciju sa novom lozinkom | -
-F04 | Filtriranje soba | Aplikacija će korisniku omogućiti filtriranje soba | -
-F05 | Pregled sobe | Aplikacija će korisniku omogućiti da pregleda informacije o sobi | -
-F06 | Rezervacije | Aplikacija će korisniku omogućiti rezerviranje sobe u željenom terminu, promjenu te otkazivanje rezervacija | -
-F07 | Potvrda rezervacije | Slanje obavijesti na mail o rezerviranju sobe, promjeni rezervacije i otkazivanju rezervacije | -
-F08 | Recenzije | Korisnik će moći ostaviti recenziju hotela, te vidjeti ostale recenzije | -
-F09 | Promjena izgleda aplikacije | Korisnik će moći mijenjati temu aplikacije (svijetla i tamna tema) | -
+F01 | Registracija | Kako bi korisnik mogao pristupiti aplikaciji, prvo se mora registrirati | Mladen Kajić
+F02 | Login | Za pristup funkcionalnostima aplikacije, korisnik će se trebati prijaviti u sustav | Jan Ivančić
+F03 | Oporavak lozinke | U slučaju zaboravljanja lozinke, korisnik može zahtijevati oporavak lozinke te će mu tada na mail doći kontrolni kod koji će unijeti u aplikaciju sa novom lozinkom | Luka Galjer
+F04 | Filtriranje soba | Aplikacija će korisniku omogućiti filtriranje soba | Luka Galjer
+F05 | Pregled sobe | Aplikacija će korisniku omogućiti da pregleda informacije o sobi | Jan Ivančić
+F06 | Rezervacije | Aplikacija će korisniku omogućiti rezerviranje sobe u željenom terminu, promjenu te otkazivanje rezervacija | Jan Ivančić
+F07 | Potvrda rezervacije | Slanje obavijesti na mail o rezerviranju sobe, promjeni rezervacije i otkazivanju rezervacije | Mladen Kajić
+F08 | Recenzije | Korisnik će moći ostaviti recenziju hotela, te vidjeti ostale recenzije | Mladen Kajić
+F09 | Promjena izgleda aplikacije | Korisnik će moći mijenjati temu aplikacije (svijetla i tamna tema) | Luka Galjer
 
 ## Tehnologije i oprema
 
