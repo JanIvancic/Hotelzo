@@ -44,11 +44,10 @@ F09 | Promjena izgleda aplikacije | Korisnik će moći mijenjati temu aplikacije
 
 ## Tehnologije i oprema
 
-Za implementaciju aplikacije koristiti ćemo Android Studio te Kotlin programski jezik. Za verzioniranje softvera koristiti ćemo Git i GitHub. 
-
-Umjesto ovih uputa jasno popišite sve tehnologije, alate i opremu koju ćete koristiti pri implementaciji vašeg rješenja. Vaše rješenje može biti implementirano u bilo kojoj tehnologiji za razvoj mobilnih aplikacija ili aplikacija za pametne uređaje osim u hibridnim web tehnologijama kao što su React Native ili HTML+CSS+JS. Tehnologije koje ćete koristiti bi trebale biti javno dostupne, a ako ih ne budemo obrađivali na vježbama u vašoj dokumentaciji ćete morati navesti način preuzimanja, instaliranja i korištenja onih tehnologija koje su neopbodne kako bi se vaš programski proizvod preveo i pokrenuo. Pazite da svi alati koje ćete koristiti moraju imati odgovarajuću licencu. Što se tiče zahtjeva nastavnika, obvezno je koristiti git i GitHub za verzioniranje programskog koda, GitHub Wiki za pisanje jednostavne dokumentacije sukladno uputama mentora, a projektne zadatke je potrebno planirati i pratiti u alatu GitHub projects.
+Za implementaciju aplikacije koristiti ćemo Android Studio te Kotlin programski jezik. Za verzioniranje softvera koristiti ćemo Git i GitHub. Za pisanje dokumentacije projekta koristiti ćemo GitHub Wiki. Za pomoć u izradi projekta koristiti ćemo se dostupnim materijalima sa kolegija Razvoj aplikacija za mobilne i pametne uređaje. 
 
 ## Baza podataka i web server
+
 Trebamo bazu podataka i pristup serveru za PHP skripte.
 
 ## .gitignore
