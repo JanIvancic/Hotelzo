@@ -23,23 +23,25 @@ Jan Ivančić | jivancic20@student.foi.hr | 0016150494 | jivancic20 | IPS3-S-G1.
 
 ## Opis domene
 
-Aplikacija je namijenjena za rezervaciju hotelske sobe. Aplikacija će pružiti osnovne informaijce o hotelu i sobama, nuditi će opcije rezeviranja sobe te promjenu i otkazivanje rezervacija. Korisnik će također moći ostaviti recenziju hotela.
-
-
+Aplikacija je namijenjena za rezervaciju hotelskih soba jednog hotela. U aplikaciji postojati će dvije vrste korisnika: gost i vlasnik hotela.
+Nakon prijave u sustav, gostu će se prikazati početni ekran aplikacije na kojem će biti prikazane osnovne informacije o hotelu, s kojeg će moći pristupiti popisu soba. 
+Aplikacija će gostu pružiti opcije rezeviranja sobe te promjenu i otkazivanje rezervacija. 
+Vlasnik će imati mogućnosti pregleda svih trenutnih i prošlih rezervacija te ručnog dodavanja nove rezervacije.
 
 ## Specifikacija projekta
 
 Oznaka | Naziv | Kratki opis | Odgovorni član tima
 ------ | ----- | ----------- | -------------------
-F01 | Registracija | Kako bi korisnik mogao pristupiti aplikaciji, prvo se mora registrirati | Mladen Kajić
-F02 | Login | Za pristup funkcionalnostima aplikacije, korisnik će se trebati prijaviti u sustav | Jan Ivančić
-F03 | Oporavak lozinke | U slučaju zaboravljanja lozinke, korisnik može zahtijevati oporavak lozinke te će mu tada na mail doći kontrolni kod koji će unijeti u aplikaciju sa novom lozinkom | Luka Galjer
-F04 | Filtriranje soba | Aplikacija će korisniku omogućiti filtriranje soba | Luka Galjer
-F05 | Pregled sobe | Aplikacija će korisniku omogućiti da pregleda informacije o sobi | Jan Ivančić
-F06 | Rezervacije | Aplikacija će korisniku omogućiti rezerviranje sobe u željenom terminu, promjenu te otkazivanje rezervacija | Jan Ivančić
-F07 | Potvrda rezervacije | Slanje obavijesti na mail o rezerviranju sobe, promjeni rezervacije i otkazivanju rezervacije | Mladen Kajić
-F08 | Recenzije | Korisnik će moći ostaviti recenziju hotela, te vidjeti ostale recenzije | Mladen Kajić
-F09 | Promjena izgleda aplikacije | Korisnik će moći mijenjati temu aplikacije (svijetla i tamna tema) | Luka Galjer
+F01 | Registracija | Kako bi korisnik mogao pristupiti aplikaciji, prvo se mora registrirati. Podaci koji se unose pri registraciji su ime, prezime, mail, broj telefona, lozinka i datum rođenja. | Mladen Kajić
+F02 | Login | Za pristup funkcionalnostima aplikacije, korisnik će se trebati prijaviti u sustav. Aplikacija će provjeravati vrstu prijavljenog korisnika (vlasnik i gost) na temelju unesenih podataka (mail i lozinka). | Jan Ivančić
+F03 | Oporavak lozinke | U slučaju zaboravljanja lozinke, gost može zahtijevati oporavak lozinke te će mu tada na mail doći kontrolni kod koji će unijeti u aplikaciju sa novom lozinkom. | Luka Galjer
+F04 | Prikaz i filtriranje soba | Nakon što gost navigira na pregled soba, aplikacija će iz baze podataka prikazati popis svih soba, koje će gost moći filtrirati prema broju kreveta koje ta soba ima i cijeni sobe po noćenju. | Luka Galjer
+F05 | Pregled odabrane sobe | Nakon što gost odabere sobu sa popisa, prikazuju mu se sve informacije o sobi, kao što su cijena, slika sobe te sadržaj sobe (kuhalo, internet, broj kreveta, tv, itd.). | Jan Ivančić
+F06 | Rezervacije | Aplikacija će gostu omogućiti rezerviranje sobe u željenom terminu i otkazivanje rezervacija. Ukoliko željeni termin nije dostupan, aplikacija će onemogućiti odabir tog termina. Podaci o informacijama će se spremati u bazu podataka. Sustav automatski odobrava rezervaciju. | Jan Ivančić
+F07 | Potvrda o rezervaciji putem maila | Kada gost rezervira sobu ili obriše rezervaciju, sustav automatski šalje obavijest o tome na mail gosta. | Mladen Kajić
+F08 | Pregled svih rezervacija | Vlasnik hotela će imati mogućnost pregleda svih rezervacija, koje će se podijeliti na trenute i prošle na temelju datuma te rezervacije i trenutnog datuma. | Mladen Kajić
+F09 | Ručno upravljanje rezervacijama | Vlasnik hotela će moći ručno dodati novu rezervaciju određene sobe, u slučaju da je soba rezervirana kontaktno umjesto kroz aplikaciju. Također će moći i ručno izbrisati rezervaciju. | Luka Galjer
+
 
 ## Tehnologije i oprema
 
