@@ -6,4 +6,9 @@
     <string name="name">Ime i prezime</string>
     <string name="phone_number">Broj telefona</string>
     <string name="button_register">Registriraj</string>
+    <string name="register_empty_field">Ispunite sva polja!</string>
+    <string name="register_passwords_mismatch">Lozinke moraju biti iste!</string>
+    <string name="register_invalid_email">Neispravan email!</string>
+    <string name="register_invalid_phone_number">Neispravan broj telefona!</string>
+    <string name="register_short_password">Lozinka mora imati barem 8 znakova!</string>
 </resources>
