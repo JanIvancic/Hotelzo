@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Hotelzo</string>
+    <string name="login_text">PRIJAVA</string>
+    <string name="email">E-mail</string>
+    <string name="password">Lozinka</string>
+    <string name="login">Prijavi se</string>
 </resources>
