@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "852370873303",
+    "project_id": "hotelzo-a802f",
+    "storage_bucket": "hotelzo-a802f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852370873303:android:7cb136aded50eeebeb4992",
+        "android_client_info": {
+          "package_name": "com.example.hotelzo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "852370873303-0f9okj7o3m964ihnckfqf31g8o2579so.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmC0e82o2VU8DXmsnYiuKt8aTg4eUxDL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "852370873303-0f9okj7o3m964ihnckfqf31g8o2579so.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
