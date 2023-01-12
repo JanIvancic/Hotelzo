@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Hotelzo</string>
+    <string name="label_forgottenPassword">Zaboravili ste lozinku?</string>
+    <string name="label_placeholder_mail">Email</string>
+    <string name="toast_empty_mail">Molimo Vas unesite vaš email adresu. </string>
+    <string name="toast_existing_mail_forgotten_password"> Uspješno poslan email za promjenu lozinke! </string>
+    <string name="toast_non_existing_mail_forgotten_password"> Ne postoji račun sa navedenom email adresom.</string>
+    <string name="send_text">Pošalji</string>
+    <string name="name_of_app">Hotelzo</string>
+    <string name="instructions_input_email">Unesite vašu email adresu</string>
 </resources>
