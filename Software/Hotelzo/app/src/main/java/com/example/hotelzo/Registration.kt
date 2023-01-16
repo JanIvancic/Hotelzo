@@ -1,14 +1,18 @@
 package com.example.hotelzo
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.util.regex.Pattern
 
 class Registration : AppCompatActivity() {
-
+    private lateinit var auth: FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,13 +20,14 @@ class Registration : AppCompatActivity() {
         setContentView(R.layout.activity_registration)
 
         val btnRegister = findViewById<Button>(R.id.btn_register)
+        auth = Firebase.auth
         btnRegister.setOnClickListener {
-            RegisterUser()
+            CheckInput()
         }
     }
 
 
-    private fun RegisterUser(){
+    private fun CheckInput(){
 
         val email = findViewById<EditText>(R.id.et_email_input).text.toString()
         val password = findViewById<EditText>(R.id.et_password_input).text.toString()
@@ -35,7 +40,6 @@ class Registration : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.register_empty_field), Toast.LENGTH_SHORT).show()
             return
         }
-
 
         if(password.length < 8){
             Toast.makeText(this, getString(R.string.register_short_password), Toast.LENGTH_LONG).show()
@@ -58,7 +62,19 @@ class Registration : AppCompatActivity() {
             return
         }
 
-        Toast.makeText(this, "Ispravni podaci.", Toast.LENGTH_SHORT).show()
+        RegisterUserAuth(email, password)
     }
+
+    private fun RegisterUserAuth(email: String, password: String) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    startActivity(Intent(this,MainActivity::class.java))
+                } else {
+                    Toast.makeText(baseContext, getString(R.string.register_error), Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
 
 }
