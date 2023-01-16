@@ -1,9 +1,10 @@
 package com.example.hotelzo.roomViewer
 
 data class Room(
-    val description: String? = null,
-    val price: Double? = null,
-    val capacity: Short? = null,
-    val image_ulr: String? = null,
-    val label: String? = null
+    val kratak_opis: String? = null,
+    val opis_sobe: String? = null,
+    val cijena_sobe: Int? = null,
+    val kapacitet: Int? = null,
+    val slika_url: String? = null,
+    val oznaka: String? = null
     )
