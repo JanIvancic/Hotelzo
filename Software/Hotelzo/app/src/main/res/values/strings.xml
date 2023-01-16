@@ -4,4 +4,7 @@
     <string name="email">E-mail</string>
     <string name="password">Lozinka</string>
     <string name="login">Prijavi se</string>
+    <string name="registracija">Registrirajte se!</string>
+    <string name="prijavi_u_racun">Prijavite se u račun</string>
+    <string name="test">TEST</string>
 </resources>
