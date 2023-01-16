@@ -22,4 +22,5 @@
     <string name="name_of_app">Hotelzo</string>
     <string name="instructions_input_email">Unesite vašu email adresu</string>
     <string name="register_error">Neuspješna registracija</string>
+    <string name="guest_role">gost</string>
 </resources>

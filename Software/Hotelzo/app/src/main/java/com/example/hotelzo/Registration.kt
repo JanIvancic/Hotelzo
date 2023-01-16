@@ -8,19 +8,30 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import java.util.regex.Pattern
 
 class Registration : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
 
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
+
+    private var email: String = ""
+    private var password: String = ""
+    private var confirmPassword: String = ""
+    private var phoneNumber: String = ""
+    private var name: String = ""
+    private var username: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
-        val btnRegister = findViewById<Button>(R.id.btn_register)
         auth = Firebase.auth
+        db = FirebaseFirestore.getInstance()
+
+        val btnRegister = findViewById<Button>(R.id.btn_register)
         btnRegister.setOnClickListener {
             CheckInput()
         }
@@ -29,12 +40,12 @@ class Registration : AppCompatActivity() {
 
     private fun CheckInput(){
 
-        val email = findViewById<EditText>(R.id.et_email_input).text.toString()
-        val password = findViewById<EditText>(R.id.et_password_input).text.toString()
-        val confirmPassword = findViewById<EditText>(R.id.et_confirm_password_input).text.toString()
-        val phoneNumber = findViewById<EditText>(R.id.et_phone_number_input).text.toString()
-        val name = findViewById<EditText>(R.id.et_name_input).text.toString()
-        val username = findViewById<EditText>(R.id.et_username_input).text.toString()
+        email = findViewById<EditText>(R.id.et_email_input).text.toString()
+        password = findViewById<EditText>(R.id.et_password_input).text.toString()
+        confirmPassword = findViewById<EditText>(R.id.et_confirm_password_input).text.toString()
+        phoneNumber = findViewById<EditText>(R.id.et_phone_number_input).text.toString()
+        name = findViewById<EditText>(R.id.et_name_input).text.toString()
+        username = findViewById<EditText>(R.id.et_username_input).text.toString()
 
         if(email.isBlank() || password.isBlank() || confirmPassword.isBlank() || phoneNumber.isBlank() || name.isBlank() || username.isBlank()){
             Toast.makeText(this, getString(R.string.register_empty_field), Toast.LENGTH_SHORT).show()
@@ -62,18 +73,32 @@ class Registration : AppCompatActivity() {
             return
         }
 
-        RegisterUserAuth(email, password)
+        RegisterUserAuth()
     }
 
-    private fun RegisterUserAuth(email: String, password: String) {
+    private fun RegisterUserAuth() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    AddUserToDatabase()
                     startActivity(Intent(this,MainActivity::class.java))
                 } else {
                     Toast.makeText(baseContext, getString(R.string.register_error), Toast.LENGTH_SHORT).show()
                 }
             }
+    }
+
+    private fun AddUserToDatabase(){
+        val dbReference = db.collection("Korisnik")
+        val newUser = hashMapOf(
+            "broj_telefona" to phoneNumber,
+            "ime" to name,
+            "lozinka" to password,
+            "mail" to email,
+            "korisnicko_ime" to username,
+            "uloga" to getString(R.string.guest_role)
+        )
+        dbReference.add(newUser)
     }
 
 
