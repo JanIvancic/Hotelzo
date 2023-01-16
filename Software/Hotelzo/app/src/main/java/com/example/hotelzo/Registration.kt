@@ -29,11 +29,13 @@ class Registration : AppCompatActivity() {
         val confirmPassword = findViewById<EditText>(R.id.et_confirm_password_input).text.toString()
         val phoneNumber = findViewById<EditText>(R.id.et_phone_number_input).text.toString()
         val name = findViewById<EditText>(R.id.et_name_input).text.toString()
+        val username = findViewById<EditText>(R.id.et_username_input).text.toString()
 
-        if(email.isBlank() || password.isBlank() || confirmPassword.isBlank() || phoneNumber.isBlank() || name.isBlank()){
+        if(email.isBlank() || password.isBlank() || confirmPassword.isBlank() || phoneNumber.isBlank() || name.isBlank() || username.isBlank()){
             Toast.makeText(this, getString(R.string.register_empty_field), Toast.LENGTH_SHORT).show()
             return
         }
+
 
         if(password.length < 8){
             Toast.makeText(this, getString(R.string.register_short_password), Toast.LENGTH_LONG).show()
@@ -50,8 +52,8 @@ class Registration : AppCompatActivity() {
             return
         }
 
-        val phone_number_test: Pattern = Pattern.compile("^[+]?[0-9]{9,13}\$")
-        if(!phone_number_test.matcher(phoneNumber).matches()){
+        val phoneNumberTest: Pattern = Pattern.compile("^[+]?[0-9]{9,13}\$")
+        if(!phoneNumberTest.matcher(phoneNumber).matches()){
             Toast.makeText(this, getString(R.string.register_invalid_phone_number), Toast.LENGTH_SHORT).show()
             return
         }

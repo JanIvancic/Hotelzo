@@ -11,4 +11,6 @@
     <string name="register_invalid_email">Neispravan email!</string>
     <string name="register_invalid_phone_number">Neispravan broj telefona!</string>
     <string name="register_short_password">Lozinka mora imati barem 8 znakova!</string>
+    <string name="username">Korisničko ime</string>
+    <string name="username_taken">Korisničko ime je zauzeto!</string>
 </resources>
