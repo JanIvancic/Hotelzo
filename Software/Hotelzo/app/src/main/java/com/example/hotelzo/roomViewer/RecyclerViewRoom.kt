@@ -2,6 +2,7 @@ package com.example.hotelzo.roomViewer
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +20,11 @@ class RecyclerViewRoom : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.room_list)
+        val btnBack = findViewById<ImageView>(R.id.back_arrow)
 
+        btnBack.setOnClickListener{
+            finish()
+        }
         recyclerView = findViewById(R.id.recycler_view_rooms)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
