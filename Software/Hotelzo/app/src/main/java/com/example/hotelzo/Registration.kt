@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -32,8 +33,13 @@ class Registration : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
 
         val btnRegister = findViewById<Button>(R.id.btn_register)
+        val btnBack = findViewById<ImageView>(R.id.back_arrow)
         btnRegister.setOnClickListener {
             CheckInput()
+        }
+
+        btnBack.setOnClickListener{
+            finish()
         }
     }
 
