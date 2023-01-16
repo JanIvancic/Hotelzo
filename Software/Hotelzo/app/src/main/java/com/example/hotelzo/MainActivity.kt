@@ -1,5 +1,6 @@
 package com.example.hotelzo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,14 +14,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val firestore = Firebase.firestore
-        val korisnikRef = firestore.collection("Korisnik")
-        val korisnikDocs = korisnikRef.get()
-        korisnikDocs.addOnSuccessListener { result ->
-            for (document in result) {
-                Log.d("Korisnik", "${document.id} => ${document.data.get("id_uloge")}")
-            }
-        }
-
+        startActivity(Intent(this,LoginActivity::class.java))
     }
 }

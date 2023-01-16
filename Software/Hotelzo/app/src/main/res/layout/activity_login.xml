@@ -12,13 +12,7 @@
         android:layout_centerHorizontal="true"
         android:text="@string/login_text"
         style="@style/TextAppearance.MaterialComponents.Headline4"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/prijavi_u_racun"
-        android:layout_below="@+id/lblPrijava"
-        style="@style/TextAppearance.MaterialComponents.Headline6"/>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmail"
@@ -61,6 +55,16 @@
         android:text="@string/login"
         android:layout_below="@+id/tilLozinka"
         android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/lblZaboravljenaLozinka"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="161dp"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:text="@string/zaboravljena_lozinka" />
 
     <TextView
         android:id="@+id/lblRegistracija"

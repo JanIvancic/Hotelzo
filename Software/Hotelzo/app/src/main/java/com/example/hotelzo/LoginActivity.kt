@@ -25,11 +25,11 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         actionBar = supportActionBar!!
-        actionBar.title = "PRIJAVA"
+        actionBar.title = "@string/login_text"
 
         progressDialog = ProgressDialog(this)
-        progressDialog.setTitle("Pričekajte")
-        progressDialog.setMessage("Prijavljivanje...")
+        progressDialog.setTitle("@string/pricekajte")
+        progressDialog.setMessage("@stgring/prijava_u_tijeku")
         progressDialog.setCanceledOnTouchOutside(false)
 
         firebaseAuth = FirebaseAuth.getInstance()
@@ -41,10 +41,10 @@ class LoginActivity : AppCompatActivity() {
             email = binding.etMail.text.toString().trim()
             password = binding.etLozinka.text.toString().trim()
             if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                binding.etMail.error = "@string/test"
+                binding.etMail.error = "@string/greska"
             }
             else if(TextUtils.isEmpty(password)){
-                binding.etLozinka.error = "@string/test"
+                binding.etLozinka.error = "@string/greska"
             }
             else{
                 firebaseLogin()
@@ -78,12 +78,3 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 }
-    /*
-    private fun checkUser() {
-        val firebaseUser = firebaseAuth.currentUser
-        if (firebaseUser != null) {
-            startActivity(Intent(this, ProfileActivity::class.java))
-            finish()
-        }
-    }
-    */

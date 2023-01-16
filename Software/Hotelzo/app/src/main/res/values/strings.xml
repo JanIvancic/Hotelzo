@@ -6,5 +6,10 @@
     <string name="login">Prijavi se</string>
     <string name="registracija">Registrirajte se!</string>
     <string name="prijavi_u_racun">Prijavite se u račun</string>
+    <string name="zaboravljena_lozinka">Zaboravili ste lozinku?</string>
+    <string name="pricekajte">Pričekajte</string>
+    <string name="prijava_u_tijeku">Prijava u tijeku...</string>
+    <string name="greska">Greška</string>
+
     <string name="test">TEST</string>
 </resources>
