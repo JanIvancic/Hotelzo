@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registration"
+    android:background="@color/background_color"
+    >
+
+    <include
+        android:id="@+id/top_bar_back"
+        layout="@layout/top_bar_back">
+    </include>
+
+
+    <EditText
+        android:id="@+id/et_username_input"
+        android:layout_width="301dp"
+        android:layout_height="63dp"
+
+        android:layout_marginTop="20dp"
+
+        android:hint="@string/username"
+        android:importantForAutofill="no"
+
+
+        android:inputType="text"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_back" />
+
+    <EditText
+        android:id="@+id/et_email_input"
+        android:layout_width="301dp"
+        android:layout_height="63dp"
+
+        android:layout_marginTop="10dp"
+        android:hint="@string/email"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+
+
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_username_input" />
+
+    <EditText
+        android:id="@+id/et_password_input"
+        android:layout_width="301dp"
+        android:layout_height="63dp"
+
+        android:layout_marginTop="10dp"
+        android:hint="@string/password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_email_input" />
+
+    <EditText
+        android:id="@+id/et_confirm_password_input"
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword"
+
+        android:layout_width="301dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_password_input"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/et_name_input"
+        android:hint="@string/name"
+        android:inputType="text"
+
+        android:layout_width="301dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_confirm_password_input"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/et_phone_number_input"
+        android:layout_width="301dp"
+        android:layout_height="63dp"
+
+        android:layout_marginTop="10dp"
+        android:hint="@string/phone_number"
+        android:importantForAutofill="no"
+        android:inputType="phone"
+
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_name_input" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:backgroundTint="@color/top_bar"
+        android:textColor="@color/black"
+
+        android:layout_marginTop="28dp"
+        android:text="@string/button_register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_phone_number_input" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
