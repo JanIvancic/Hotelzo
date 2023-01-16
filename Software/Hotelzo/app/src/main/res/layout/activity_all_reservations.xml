@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AllReservationsActivity">
+    tools:context=".AllReservationsActivity"
+    android:background="@color/background_color">
 
     <include
-        android:id="@+id/top_bar_back"
-        layout="@layout/top_bar_back">
+        android:id="@+id/top_bar"
+        layout="@layout/top_bar">
     </include>
 
 
@@ -20,9 +21,8 @@
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_bar_back"
-        app:layout_constraintBottom_toTopOf="@id/tabs"
-/>
+        app:layout_constraintTop_toBottomOf="@id/top_bar"
+        app:layout_constraintBottom_toBottomOf="@id/tabs" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
