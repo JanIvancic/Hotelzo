@@ -13,19 +13,86 @@
         android:id="@+id/top_bar_back"
         layout="@layout/top_bar_back"></include>
 
+    <LinearLayout
+        android:id="@+id/capacity_filter_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/price_filter_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_back">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:text="@string/filter_kapacitet"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <Spinner
+            android:id="@+id/capacity_filter_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:paddingStart="10dp">
+
+        </Spinner>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/price_filter_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_view_rooms"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/capacity_filter_layout">
+
+        <TextView
+            android:textSize="24dp"
+            android:paddingHorizontal="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:text="@string/filter_price"
+            android:textColor="@color/black" />
+
+        <Spinner
+            android:id="@+id/price_filter_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:paddingStart="10dp">
+
+        </Spinner>
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
 
         android:id="@+id/recycler_view_rooms"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:clipToPadding="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="0.1dp"
 
+        android:layout_height="match_parent"
+        android:layout_marginTop="168dp"
+        android:clipToPadding="false"
+
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar_back"
+        app:layout_constraintTop_toBottomOf="@+id/capacity_filter_layout"
         tools:listitem="@layout/room_list_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

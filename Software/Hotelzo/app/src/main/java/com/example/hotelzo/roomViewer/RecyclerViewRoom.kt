@@ -1,10 +1,12 @@
 package com.example.hotelzo.roomViewer
 
+
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.Toast
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +44,22 @@ class RecyclerViewRoom : AppCompatActivity() {
                 Log.d("RecyclerViewRoom", "Data loaded successfully")
                 recyclerView.adapter = RoomAdapter(roomList)
             }
+
+            val options = arrayOf("Sve", "1", "2", "3")
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, options)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            val spinner = findViewById<Spinner>(com.example.hotelzo.R.id.capacity_filter_spinner)
+            spinner.adapter = adapter
+
+            spinner.setSelection(0);
+
+
+            val priceRanges = arrayOf("Sve", "50€ - 75€", "75€ - 100€", "100€ - 125€", "125€ - 150€")
+            val adapterPrice = ArrayAdapter(this, android.R.layout.simple_spinner_item, priceRanges)
+            adapterPrice.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            val priceFilterSpinner = findViewById<Spinner>(R.id.price_filter_spinner)
+            priceFilterSpinner.adapter = adapterPrice
+            priceFilterSpinner.setSelection(0);
         }
             .addOnFailureListener {
                 Toast.makeText( this, it.toString(), Toast.LENGTH_SHORT).show()
