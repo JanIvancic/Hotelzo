@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hotelzo.adapters.ReservationsAdapter
 import com.example.hotelzo.data.Reservations
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 import kotlin.collections.ArrayList
 
 class AllReservationsActivity : AppCompatActivity() {
@@ -16,6 +19,7 @@ class AllReservationsActivity : AppCompatActivity() {
     private lateinit var reservationList: ArrayList<Reservations>
     private lateinit var db: FirebaseFirestore
 
+    private lateinit var currentDate: Date
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_reservations)
@@ -25,12 +29,33 @@ class AllReservationsActivity : AppCompatActivity() {
 
         reservationList = arrayListOf()
 
+        currentDate = Calendar.getInstance().time
+        db = FirebaseFirestore.getInstance()
+
+        getActiveReservations()
+
+    }
+
+    private fun getPastReservations(){
+        db.collection("Rezervacija")
+            .whereLessThan("datum_kraj", currentDate)
+            .get().addOnSuccessListener {
+                getData(it.documents)
+            }
+    }
+
+    private fun getActiveReservations(){
+        db.collection("Rezervacija")
+            .whereGreaterThan("datum_kraj", currentDate)
+            .get().addOnSuccessListener {
+                getData(it.documents)
+            }
+    }
+
+    private fun getData(documents: MutableList<DocumentSnapshot>) {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy")
 
-        db = FirebaseFirestore.getInstance()
-        db.collection("Rezervacija").get().addOnSuccessListener {
-
-            for (data in it.documents){
+            for (data in documents){
 
                 var timestamp = data["datum_pocetak"] as com.google.firebase.Timestamp
                 val start_date = dateFormat.format(timestamp.toDate())
@@ -43,9 +68,7 @@ class AllReservationsActivity : AppCompatActivity() {
 
                 val reservation = Reservations(end_date = end_date, start_date = start_date, name = name, room_label = room_label)
                 reservationList.add(reservation)
-
             }
             recyclerView.adapter = ReservationsAdapter(reservationList)
         }
-    }
 }
