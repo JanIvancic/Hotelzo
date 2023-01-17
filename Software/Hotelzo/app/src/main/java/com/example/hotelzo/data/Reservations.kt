@@ -1,10 +1,8 @@
 package com.example.hotelzo.data
 
-import java.util.Date
-
 data class Reservations(
-    val end_date: Date? = null,
-    val start_date: Date? = null,
+    val end_date: String? = null,
+    var start_date: String? = null,
     val name: String? = null,
     val room_label: String? = null
 )

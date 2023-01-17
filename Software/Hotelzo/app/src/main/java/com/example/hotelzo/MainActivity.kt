@@ -10,6 +10,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //pokretanje stranice registracije za testiranje
-        startActivity(Intent(this,Registration::class.java))
+        startActivity(Intent(this,AllReservationsActivity::class.java))
     }
 }

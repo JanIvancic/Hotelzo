@@ -11,7 +11,7 @@ import com.example.hotelzo.data.Reservations
 class ReservationsAdapter(private val reservationList: ArrayList<Reservations>) : RecyclerView.Adapter<ReservationsAdapter.reservationViewHolder>() {
     class reservationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvName: TextView = itemView.findViewById(R.id.txt_name)
-        val tvRoomLabel: TextView = itemView.findViewById(R.id.txt_room_label)
+        val tvRoomLabel: TextView = itemView.findViewById(R.id.txt_room)
         val tvStartDate: TextView = itemView.findViewById(R.id.date_start)
         val tvEndDate: TextView = itemView.findViewById(R.id.date_end)
     }
