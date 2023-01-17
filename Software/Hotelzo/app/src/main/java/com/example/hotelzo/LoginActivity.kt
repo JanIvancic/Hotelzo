@@ -11,11 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.example.hotelzo.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import kotlin.math.log
+
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -35,8 +31,8 @@ class LoginActivity : AppCompatActivity() {
         //actionBar.title = "@string/login_text"
 
         progressDialog = ProgressDialog(this)
-        progressDialog.setTitle("@string/pricekajte")
-        progressDialog.setMessage("@stgring/prijava_u_tijeku")
+        progressDialog.setTitle(getString(R.string.pricekajte))
+        progressDialog.setMessage(getString(R.string.prijava_u_tijeku))
         progressDialog.setCanceledOnTouchOutside(false)
 
         firebaseAuth = FirebaseAuth.getInstance()
