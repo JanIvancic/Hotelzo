@@ -2,6 +2,7 @@ package com.example.hotelzo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 
 class PregledSobeActivity : AppCompatActivity() {
@@ -33,7 +34,13 @@ class PregledSobeActivity : AppCompatActivity() {
 
         val tvKapacitet = findViewById<TextView>(R.id.tv_kapacitet_value)
         tvKapacitet.text = kapacitet.toString()
+
+        val gumbRezerviraj = findViewById<Button>(R.id.btn_rezerviraj)
+        gumbRezerviraj.setOnClickListener {
+            //započni rezervaciju
+        }
     }
+
 
 }
 
