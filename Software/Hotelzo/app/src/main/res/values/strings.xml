@@ -23,4 +23,5 @@
     <string name="instructions_input_email">Unesite vašu email adresu</string>
     <string name="register_error">Neuspješna registracija</string>
     <string name="guest_role">gost</string>
+    <string name="rezerviraj">Rezerviraj</string>
 </resources>

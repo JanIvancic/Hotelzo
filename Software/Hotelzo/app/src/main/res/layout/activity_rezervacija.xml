@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/top_bar_back"
+        layout="@layout/top_bar_back">
+    </include>
+    <CalendarView
+        android:id="@+id/calendar_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dateTextAppearance="@android:style/TextAppearance.Large"
+        android:firstDayOfWeek="1"
+        android:maxDate="01/01/2030"
+        android:minDate="01/01/2020"
+        android:weekDayTextAppearance="@android:style/TextAppearance.Medium" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/dolazak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Datum dolaska: "
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_check_in_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Datum odlaska: "
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:id="@+id/odlazak"/>
+
+        <TextView
+            android:id="@+id/tv_check_out_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="@string/rezerviraj"
+        android:textSize="18sp"
+        android:backgroundTint="@color/top_bar"
+        android:textColor="@color/black"/>
+</LinearLayout>
