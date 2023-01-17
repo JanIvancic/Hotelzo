@@ -5,11 +5,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.example.hotelzo.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -24,8 +30,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        actionBar = supportActionBar!!
-        actionBar.title = "@string/login_text"
+
+        //actionBar = supportActionBar!!
+        //actionBar.title = "@string/login_text"
 
         progressDialog = ProgressDialog(this)
         progressDialog.setTitle("@string/pricekajte")
@@ -33,29 +40,40 @@ class LoginActivity : AppCompatActivity() {
         progressDialog.setCanceledOnTouchOutside(false)
 
         firebaseAuth = FirebaseAuth.getInstance()
+        FirebaseAuth.getInstance().signOut();
         checkUser()
 
         //REGISTRACIJA
+        val registracija = binding.lblRegistracija
+        registracija.setOnClickListener {
+            startActivity(Intent(this, Registration::class.java))
+        }
+
+        val zablozinka = binding.lblZaboravljenaLozinka
+        zablozinka.setOnClickListener {
+            startActivity(Intent(this, ForgottenPassword::class.java))
+        }
 
         binding.btnPrijava.setOnClickListener {
-            email = binding.etMail.text.toString().trim()
-            password = binding.etLozinka.text.toString().trim()
-            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                binding.etMail.error = "@string/greska"
-            }
-            else if(TextUtils.isEmpty(password)){
-                binding.etLozinka.error = "@string/greska"
-            }
-            else{
-                firebaseLogin()
-            }
-
-            }
+            provjeriPodatke()
         }
+    }
+
+    private fun provjeriPodatke() {
+        email = binding.etMail.text.toString().trim()
+        password = binding.etLozinka.text.toString().trim()
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.etMail.error = "@string/greska"
+        } else if (TextUtils.isEmpty(password)) {
+            binding.etLozinka.error = "@string/greska"
+        } else {
+            firebaseLogin()
+        }
+    }
 
     private fun checkUser() {
         val firebaseUser = firebaseAuth.currentUser
-        if(firebaseUser != null){
+        if (firebaseUser != null) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
@@ -77,4 +95,9 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Neuspješna prijava", Toast.LENGTH_SHORT).show()
             }
     }
+
+
+
+
+
 }

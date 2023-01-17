@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         >
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,6 +32,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilLozinka"
         app:passwordToggleEnabled="true"
@@ -39,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etLozinka"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

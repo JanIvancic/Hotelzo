@@ -12,8 +12,6 @@
     <string name="greska">Greška</string>
 
     <string name="test">TEST</string>
-    <string name="email">E-mail</string>
-    <string name="password">Lozinka</string>
     <string name="confirm_password">Potvrdite lozinku</string>
     <string name="name">Ime i prezime</string>
     <string name="phone_number">Broj telefona</string>
