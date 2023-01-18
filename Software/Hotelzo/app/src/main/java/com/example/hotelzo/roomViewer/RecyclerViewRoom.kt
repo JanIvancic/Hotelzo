@@ -55,10 +55,10 @@ class RecyclerViewRoom : AppCompatActivity() {
             val options = arrayOf("Sve", "1", "2", "3")
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, options)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            val spinner = findViewById<Spinner>(com.example.hotelzo.R.id.capacity_filter_spinner)
+            val spinner = findViewById<Spinner>(R.id.capacity_filter_spinner)
             spinner.adapter = adapter
 
-            spinner.setSelection(0);
+            spinner.setSelection(0)
 
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -87,7 +87,7 @@ class RecyclerViewRoom : AppCompatActivity() {
             adapterPrice.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
             priceFilterSpinner.adapter = adapterPrice
-            priceFilterSpinner.setSelection(0);
+            priceFilterSpinner.setSelection(0)
 
             priceFilterSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
