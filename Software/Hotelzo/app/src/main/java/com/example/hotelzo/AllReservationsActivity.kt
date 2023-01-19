@@ -2,6 +2,7 @@ package com.example.hotelzo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Switch
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hotelzo.adapters.ReservationsAdapter
@@ -19,6 +20,8 @@ class AllReservationsActivity : AppCompatActivity() {
     private lateinit var reservationList: ArrayList<Reservations>
     private lateinit var db: FirebaseFirestore
 
+    private lateinit var switch: Switch
+
     private lateinit var currentDate: Date
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +35,15 @@ class AllReservationsActivity : AppCompatActivity() {
         currentDate = Calendar.getInstance().time
         db = FirebaseFirestore.getInstance()
 
+        switch = findViewById(R.id.sw_prijasnje)
+
         getActiveReservations()
+
+        switch.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                getPastReservations()
+            } else getActiveReservations()
+        }
 
     }
 
@@ -54,6 +65,9 @@ class AllReservationsActivity : AppCompatActivity() {
 
     private fun getData(documents: MutableList<DocumentSnapshot>) {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy")
+
+        reservationList.clear()
+        recyclerView.adapter?.notifyDataSetChanged()
 
             for (data in documents){
 
