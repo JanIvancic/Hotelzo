@@ -1,5 +1,6 @@
 package com.example.hotelzo
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Switch
@@ -16,13 +17,16 @@ import kotlin.collections.ArrayList
 
 class AllReservationsActivity : AppCompatActivity() {
 
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    private lateinit var switch: Switch
     private lateinit var recyclerView: RecyclerView
+
     private lateinit var reservationList: ArrayList<Reservations>
     private lateinit var db: FirebaseFirestore
 
-    private lateinit var switch: Switch
-
+    private var showActive: Boolean = true
     private lateinit var currentDate: Date
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_reservations)
@@ -31,58 +35,55 @@ class AllReservationsActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         reservationList = arrayListOf()
-
         currentDate = Calendar.getInstance().time
         db = FirebaseFirestore.getInstance()
-
         switch = findViewById(R.id.sw_prijasnje)
 
-        getActiveReservations()
+        getReservations()
 
         switch.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                getPastReservations()
-            } else getActiveReservations()
+            reservationList.clear()
+            showActive = !isChecked
+            getReservations()
         }
 
     }
 
-    private fun getPastReservations(){
-        db.collection("Rezervacija")
-            .whereLessThan("datum_kraj", currentDate)
-            .get().addOnSuccessListener {
-                getData(it.documents)
-            }
+    private fun getReservations(){
+        if(showActive){
+            db.collection("Rezervacija")
+                .whereGreaterThan("datum_kraj", currentDate)
+                .get().addOnSuccessListener {
+                    getData(it.documents)
+                }
+        } else {
+            db.collection("Rezervacija")
+                .whereLessThan("datum_kraj", currentDate)
+                .get().addOnSuccessListener {
+                    getData(it.documents)
+                }
+        }
+
     }
 
-    private fun getActiveReservations(){
-        db.collection("Rezervacija")
-            .whereGreaterThan("datum_kraj", currentDate)
-            .get().addOnSuccessListener {
-                getData(it.documents)
-            }
-    }
-
+    @SuppressLint("SimpleDateFormat")
     private fun getData(documents: MutableList<DocumentSnapshot>) {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy")
 
-        reservationList.clear()
-        recyclerView.adapter?.notifyDataSetChanged()
+        for (data in documents){
 
-            for (data in documents){
+            var timestamp = data["datum_pocetak"] as com.google.firebase.Timestamp
+            val start_date = dateFormat.format(timestamp.toDate())
 
-                var timestamp = data["datum_pocetak"] as com.google.firebase.Timestamp
-                val start_date = dateFormat.format(timestamp.toDate())
+            timestamp = data["datum_kraj"] as com.google.firebase.Timestamp
+            val end_date = dateFormat.format(timestamp.toDate())
 
-                timestamp = data["datum_kraj"] as com.google.firebase.Timestamp
-                val end_date = dateFormat.format(timestamp.toDate())
+            val name:String = data["ime"].toString()
+            val room_label:String = data["oznaka_sobe"].toString()
 
-                val name:String = data["ime"].toString()
-                val room_label:String = data["oznaka_sobe"].toString()
-
-                val reservation = Reservations(end_date = end_date, start_date = start_date, name = name, room_label = room_label)
-                reservationList.add(reservation)
-            }
-            recyclerView.adapter = ReservationsAdapter(reservationList)
+            val reservation = Reservations(end_date = end_date, start_date = start_date, name = name, room_label = room_label)
+            reservationList.add(reservation)
         }
+        recyclerView.adapter = ReservationsAdapter(reservationList)
+    }
 }
