@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.example.hotelzo.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class LoginActivity : AppCompatActivity() {
@@ -75,22 +77,38 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun firebaseLogin()  {
+    private fun firebaseLogin() {
         progressDialog.show()
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 progressDialog.dismiss()
                 val firebaseUser = firebaseAuth.currentUser
                 val email = firebaseUser!!.email
-                Toast.makeText(this, "Prijavljeni ste kao $email", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                // Access Firestore and get the user's document
+                val firestore = FirebaseFirestore.getInstance()
+                firestore.collection("Korisnik")
+                    .whereEqualTo("mail", email)
+                    .get()
+                    .addOnSuccessListener { documents ->
+                        for (document in documents) {
+                            val uloga:String = document["uloga"].toString()
+                            if (uloga == "admin") {
+                                Toast.makeText(this, "Prijavljeni ste kao admin", Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this, MainActivity::class.java))
+                                finish()
+                            } else {
+                                startActivity(Intent(this, MainActivity::class.java))
+                                finish()
+                            }
+                        }
+                    }
             }
             .addOnFailureListener {
                 progressDialog.dismiss()
                 Toast.makeText(this, "Neuspješna prijava", Toast.LENGTH_SHORT).show()
             }
     }
+
 
 
 
