@@ -31,4 +31,11 @@
     <string name="loading_error">Greška pri dohvatu.</string>
     <string name="past_reservations">Prijašnje</string>
     <string name="reservations">Rezervacije</string>
+    <string name="email_subject_reservation">Rezervacija sobe</string>
+    <string name="email_greeting">Poštovani</string>
+    <string name="email_room_reserved">Uspješno ste rezervirali sobu</string>
+    <string name="email_reservation_start">Početak rezervacije: </string>
+    <string name="email_reservation_end">Kraj rezervacije: </string>
+    <string name="email_price">Cijena: </string>
+    <string name="email_farewell">Lijep pozdrav,</string>
 </resources>
