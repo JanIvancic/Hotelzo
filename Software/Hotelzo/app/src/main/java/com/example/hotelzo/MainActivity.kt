@@ -8,8 +8,7 @@ import com.example.hotelzo.roomViewer.RecyclerViewRoom
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
-        val intent = Intent(this, RecyclerViewRoom::class.java)
-        startActivity(intent)
+        setContentView(R.layout.activity_main)
+
     }
 }
