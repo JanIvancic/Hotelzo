@@ -23,6 +23,17 @@
     <string name="instructions_input_email">Unesite vašu email adresu</string>
     <string name="register_error">Neuspješna registracija</string>
     <string name="guest_role">gost</string>
+
     <string name="filter_kapacitet">Kapacitet:</string>
     <string name="filter_price">Cijena:</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="room">Soba:</string>
+    <string name="start_date">Datum početka:</string>
+    <string name="end_date">Datum kraja:</string>
+    <string name="sample_text">Sample text</string>
+    <string name="loading_error">Greška pri dohvatu.</string>
+    <string name="past_reservations">Prijašnje</string>
+    <string name="reservations">Rezervacije</string>
+
 </resources>
