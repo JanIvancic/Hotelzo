@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">Hotelzo</string>
+    <string name="login_text">PRIJAVA</string>
     <string name="email">E-mail</string>
     <string name="password">Lozinka</string>
+    <string name="login">Prijavi se</string>
+    <string name="registracija">Registrirajte se!</string>
+    <string name="prijavi_u_racun">Prijavite se u račun</string>
+    <string name="zaboravljena_lozinka">Zaboravili ste lozinku?</string>
+
+    <string name="greska">Greška</string>
+
+    <string name="test">TEST</string>
     <string name="confirm_password">Potvrdite lozinku</string>
     <string name="name">Ime i prezime</string>
     <string name="phone_number">Broj telefona</string>
@@ -23,6 +32,10 @@
     <string name="instructions_input_email">Unesite vašu email adresu</string>
     <string name="register_error">Neuspješna registracija</string>
     <string name="guest_role">gost</string>
+
+    <string name="pricekajte">Pričekajte</string>
+    <string name="prijava_u_tijeku">Prijava u tijeku</string>
+    <string name="hotelzo">Hotelzo</string>
 
     <string name="filter_kapacitet">Kapacitet:</string>
     <string name="filter_price">Cijena:</string>
