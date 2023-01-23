@@ -10,6 +10,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.example.hotelzo.databinding.ActivityLoginBinding
+import com.example.hotelzo.roomViewer.RecyclerViewRoom
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -66,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
             binding.etLozinka.error = "@string/greska"
         } else {
             firebaseLogin()
+
         }
     }
 
@@ -94,10 +96,10 @@ class LoginActivity : AppCompatActivity() {
                             val uloga:String = document["uloga"].toString()
                             if (uloga == "admin") {
                                 Toast.makeText(this, "Prijavljeni ste kao admin", Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this, MainActivity::class.java))
+                                startActivity(Intent(this, AllReservationsActivity::class.java))
                                 finish()
                             } else {
-                                startActivity(Intent(this, MainActivity::class.java))
+                                startActivity(Intent(this, RecyclerViewRoom::class.java))
                                 finish()
                             }
                         }

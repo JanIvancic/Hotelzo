@@ -52,12 +52,13 @@
             android:name=".MainActivity"
             android:launchMode="singleTask"
             android:exported="true">
-
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        
+        <activity android:name="com.example.hotelzo.PregledSobeActivity" />
+
     </application>
 
 </manifest>

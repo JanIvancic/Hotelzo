@@ -1,5 +1,6 @@
 package com.example.hotelzo.roomViewer
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hotelzo.R
 import com.bumptech.glide.Glide
+import com.example.hotelzo.PregledSobeActivity
 
 class RoomAdapter(private val roomList:ArrayList<Room>) : RecyclerView.Adapter<RoomAdapter.MyViewHolder>() {
 
@@ -33,7 +35,16 @@ class RoomAdapter(private val roomList:ArrayList<Room>) : RecyclerView.Adapter<R
             .load(roomList[position].slika_url)
             .into(holder.image)
 
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, PregledSobeActivity::class.java)
+            intent.putExtra("cijenaSobe", roomList[position].cijena_sobe)
+            intent.putExtra("kapacitet", roomList[position].kapacitet)
+            intent.putExtra("opisSobe", roomList[position].kratak_opis)
+            intent.putExtra("oznakaSobe", roomList[position].oznaka)
+            holder.itemView.context.startActivity(intent)
+        }
     }
+
 
     override fun getItemCount(): Int {
         return roomList.size

@@ -22,12 +22,6 @@ class PregledSobeActivity : AppCompatActivity() {
         val tvOpisSobe = findViewById<TextView>(R.id.tv_opis_sobe)
         tvOpisSobe.text = "Opis sobe: $opisSobe"
 
-        val tvInternet = findViewById<TextView>(R.id.tv_internet)
-        if(true){
-            tvInternet.text = "Internet: Da"
-        }else{
-            tvInternet.text = "Internet: Ne"
-        }
 
         val tvCijenaSobe = findViewById<TextView>(R.id.tv_cijena_sobe_value)
         tvCijenaSobe.text = cijenaSobe.toString()
