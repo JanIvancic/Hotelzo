@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 
 class PregledSobeActivity : AppCompatActivity() {
 
@@ -17,6 +18,12 @@ class PregledSobeActivity : AppCompatActivity() {
         val kapacitet = intent.getIntExtra("kapacitet", 0)
         val opisSobe = intent.getStringExtra("opis_sobe")
         val oznaka = intent.getStringExtra("oznaka")
+        val roomImage = findViewById<ImageView>(R.id.room_image)
+        val imageUrl = intent.getStringExtra("image_url")
+        Glide.with(this)
+            .load(imageUrl)
+            .into(roomImage)
+
 
         val tvOznakaSobe = findViewById<TextView>(R.id.tv_oznaka_sobe)
         tvOznakaSobe.text = "Oznaka sobe: $oznaka"

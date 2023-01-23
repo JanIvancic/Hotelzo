@@ -49,6 +49,7 @@ class RoomAdapter(private val roomList:ArrayList<Room>) : RecyclerView.Adapter<R
 
             intent.putExtra("cijena_sobe", roomList[position].cijena_sobe)
             intent.putExtra("kapacitet", roomList[position].kapacitet)
+            intent.putExtra("image_url", roomList[position].slika_url)
 
             holder.itemView.context.startActivity(intent)
         }
