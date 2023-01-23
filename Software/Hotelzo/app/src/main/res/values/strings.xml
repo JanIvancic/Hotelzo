@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">Hotelzo</string>
+    <string name="login_text">PRIJAVA</string>
     <string name="email">E-mail</string>
     <string name="password">Lozinka</string>
+    <string name="login">Prijavi se</string>
+    <string name="registracija">Registrirajte se!</string>
+    <string name="prijavi_u_racun">Prijavite se u račun</string>
+    <string name="zaboravljena_lozinka">Zaboravili ste lozinku?</string>
+
+    <string name="greska">Greška</string>
+
+    <string name="test">TEST</string>
     <string name="confirm_password">Potvrdite lozinku</string>
     <string name="name">Ime i prezime</string>
     <string name="phone_number">Broj telefona</string>
@@ -15,7 +24,7 @@
     <string name="username_taken">Korisničko ime je zauzeto!</string>
     <string name="label_forgottenPassword">Zaboravili ste lozinku?</string>
     <string name="label_placeholder_mail">Email</string>
-    <string name="toast_empty_mail">Molimo Vas unesite vaš email adresu. </string>
+    <string name="toast_empty_mail">Molimo Vas unesite vašu email adresu. </string>
     <string name="toast_existing_mail_forgotten_password"> Uspješno poslan email za promjenu lozinke! </string>
     <string name="toast_non_existing_mail_forgotten_password"> Ne postoji račun sa navedenom email adresom.</string>
     <string name="send_text">Pošalji</string>
@@ -23,4 +32,21 @@
     <string name="instructions_input_email">Unesite vašu email adresu</string>
     <string name="register_error">Neuspješna registracija</string>
     <string name="guest_role">gost</string>
+
+    <string name="pricekajte">Pričekajte</string>
+    <string name="prijava_u_tijeku">Prijava u tijeku</string>
+    <string name="hotelzo">Hotelzo</string>
+
+    <string name="filter_kapacitet">Kapacitet:</string>
+    <string name="filter_price">Cijena:</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="room">Soba:</string>
+    <string name="start_date">Datum početka:</string>
+    <string name="end_date">Datum kraja:</string>
+    <string name="sample_text">Sample text</string>
+    <string name="loading_error">Greška pri dohvatu.</string>
+    <string name="past_reservations">Prijašnje</string>
+    <string name="reservations">Rezervacije</string>
+
 </resources>
