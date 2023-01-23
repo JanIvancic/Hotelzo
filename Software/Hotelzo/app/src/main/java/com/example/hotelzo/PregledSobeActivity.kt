@@ -2,7 +2,9 @@ package com.example.hotelzo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 
 class PregledSobeActivity : AppCompatActivity() {
@@ -10,18 +12,17 @@ class PregledSobeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pregled_sobe)
-
-        val cijenaSobe = intent.getDoubleExtra("cijenaSobe", 0.0)
+        val btnBack = findViewById<ImageView>(R.id.back_arrow)
+        val cijenaSobe = intent.getIntExtra("cijena_sobe",0)
         val kapacitet = intent.getIntExtra("kapacitet", 0)
-        val opisSobe = intent.getStringExtra("opisSobe")
-        val oznakaSobe = intent.getStringExtra("oznakaSobe")
+        val opisSobe = intent.getStringExtra("opis_sobe")
+        val oznaka = intent.getStringExtra("oznaka")
 
         val tvOznakaSobe = findViewById<TextView>(R.id.tv_oznaka_sobe)
-        tvOznakaSobe.text = "Oznaka sobe: $oznakaSobe"
+        tvOznakaSobe.text = "Oznaka sobe: $oznaka"
 
         val tvOpisSobe = findViewById<TextView>(R.id.tv_opis_sobe)
         tvOpisSobe.text = "Opis sobe: $opisSobe"
-
 
         val tvCijenaSobe = findViewById<TextView>(R.id.tv_cijena_sobe_value)
         tvCijenaSobe.text = cijenaSobe.toString()
@@ -32,6 +33,9 @@ class PregledSobeActivity : AppCompatActivity() {
         val gumbRezerviraj = findViewById<Button>(R.id.btn_rezerviraj)
         gumbRezerviraj.setOnClickListener {
             //započni rezervaciju
+        }
+        btnBack.setOnClickListener{
+            finish()
         }
     }
 

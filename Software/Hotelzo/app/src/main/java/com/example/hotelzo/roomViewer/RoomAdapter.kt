@@ -37,10 +37,19 @@ class RoomAdapter(private val roomList:ArrayList<Room>) : RecyclerView.Adapter<R
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, PregledSobeActivity::class.java)
-            intent.putExtra("cijenaSobe", roomList[position].cijena_sobe)
+
+            if(roomList[position].oznaka!=null){
+                intent.putExtra("oznaka", roomList[position].oznaka)
+                Log.d("OZNAKA", roomList[position].oznaka.toString())
+            }
+            Log.d("OZNAKA2", roomList[position].oznaka.toString())
+            if(roomList[position].opis_sobe!=null){
+                intent.putExtra("opis_sobe", roomList[position].opis_sobe)
+            }
+
+            intent.putExtra("cijena_sobe", roomList[position].cijena_sobe)
             intent.putExtra("kapacitet", roomList[position].kapacitet)
-            intent.putExtra("opisSobe", roomList[position].kratak_opis)
-            intent.putExtra("oznakaSobe", roomList[position].oznaka)
+
             holder.itemView.context.startActivity(intent)
         }
     }
