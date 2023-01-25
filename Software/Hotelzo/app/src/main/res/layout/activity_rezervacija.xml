@@ -16,7 +16,6 @@
         android:maxDate="01/01/2030"
         android:minDate="01/01/2020"
         android:weekDayTextAppearance="@android:style/TextAppearance.Medium" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +34,18 @@
             android:id="@+id/tv_check_in_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="@integer/material_motion_duration_long_1"
             android:textSize="18sp" />
+        <TextView
+            android:id="@+id/removePrvi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Obriši"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="right"
+            android:onClick="removeCheckInDate"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -56,10 +66,23 @@
             android:id="@+id/tv_check_out_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="@integer/material_motion_duration_long_1"
+
             android:textSize="18sp" />
+        <TextView
+            android:id="@+id/removeDrugi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Obriši"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="end"
+            android:onClick="removeCheckOutDate"
+            />
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_rezerviraj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
