@@ -1,6 +1,7 @@
 package com.example.hotelzo
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.TextView
@@ -11,6 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.lang.String.format
 import java.text.SimpleDateFormat
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
 class RezervacijaActivity : AppCompatActivity() {
@@ -19,6 +21,7 @@ class RezervacijaActivity : AppCompatActivity() {
     private lateinit var checkOutDateTextView: TextView
     private var checkInTimestamp: Timestamp? = null
     private var checkOutTimestamp: Timestamp? = null
+    private var userName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,7 +88,8 @@ class RezervacijaActivity : AppCompatActivity() {
         val dbReference = db.collection("Rezervacija")
         val newRezervacija = hashMapOf(
             "datum_kraj" to checkOutTimestamp,
-            "datum_pocetak" to checkInTimestamp
+            "datum_pocetak" to checkInTimestamp,
+            "ime" to userName
         )
         dbReference.add(newRezervacija)
             .addOnSuccessListener {
@@ -116,12 +120,31 @@ class RezervacijaActivity : AppCompatActivity() {
                     }
                 }
                 if (!conflictFound) {
+                    getCurrentUserName()
                     addRezarvaciju(checkInTimestamp, checkOutTimestamp)
                 }
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Pogreška pri dohvaćanju postojećih rezervacija. Molimo pokušajte ponovno.", Toast.LENGTH_SHORT).show()
             }
+    }
+
+
+    private fun getCurrentUserName() {
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            val userId = user.uid
+            db.collection("korisnik").document(userId)
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        userName = "${document.getString("ime")} ${document.getString("prezime")}"
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Pogreška pri dohvaćanju imena korisnika. Molimo pokušajte ponovno.", Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 
 
