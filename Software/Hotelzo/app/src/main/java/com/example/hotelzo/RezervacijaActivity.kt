@@ -74,14 +74,11 @@ class RezervacijaActivity : AppCompatActivity() {
                         this, "Molim vas izaberite datum odlaska.", Toast.LENGTH_SHORT
                     ).show()
                 }
-            } else if(checkInTimestamp!!.compareTo(checkOutTimestamp!!) > 0) {
-                Toast.makeText(
-                    this, "Datum odlaska ne moze biti prije datuma dolaska.", Toast.LENGTH_SHORT
-                ).show()
             } else {
-                addRezarvaciju(checkInTimestamp!!, checkOutTimestamp!!)
+                checkForReservationConflict(checkInTimestamp!!, checkOutTimestamp!!)
             }
         }
+
     }
 
     private fun addRezarvaciju(checkInTimestamp: Timestamp, checkOutTimestamp: Timestamp) {
@@ -99,4 +96,37 @@ class RezervacijaActivity : AppCompatActivity() {
                 Toast.makeText(this, "Greška: $e", Toast.LENGTH_SHORT).show()
             }
     }
+
+    private fun checkForReservationConflict(checkInTimestamp: Timestamp, checkOutTimestamp: Timestamp) {
+        var conflictFound = false
+        db.collection("Rezervacija")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val existingCheckInTimestamp = document.getTimestamp("datum_pocetak")
+                    val existingCheckOutTimestamp = document.getTimestamp("datum_kraj")
+                    if (checkInTimestamp.toDate().after(existingCheckInTimestamp!!.toDate()) && checkInTimestamp.toDate().before(existingCheckOutTimestamp!!.toDate()) ||
+                        checkOutTimestamp.toDate().after(existingCheckInTimestamp.toDate()) && checkOutTimestamp.toDate().before(existingCheckInTimestamp?.toDate()) ||
+                        checkInTimestamp.toDate().equals(existingCheckInTimestamp.toDate()) || checkOutTimestamp.toDate().equals(existingCheckOutTimestamp?.toDate())) {
+                        Toast.makeText(
+                            this, "Već postoji rezervacija za odabrani datum. Molimo odaberite drugi datum.", Toast.LENGTH_SHORT
+                        ).show()
+                        conflictFound = true
+                        break
+                    }
+                }
+                if (!conflictFound) {
+                    addRezarvaciju(checkInTimestamp, checkOutTimestamp)
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Pogreška pri dohvaćanju postojećih rezervacija. Molimo pokušajte ponovno.", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+
+
+
+
+
 }
