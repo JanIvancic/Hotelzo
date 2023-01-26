@@ -39,11 +39,11 @@ class RezervacijaActivity : AppCompatActivity() {
             val selectedTimestamp = Timestamp(selectedDate.time)
             if (checkInTimestamp == null) {
                 checkInTimestamp = selectedTimestamp
-                checkInDateTextView.text = SimpleDateFormat("MM/dd/yyyy").format(selectedTimestamp.toDate())
+                checkInDateTextView.text = SimpleDateFormat("dd/MM/yyyy").format(selectedTimestamp.toDate())
             } else {
                 checkOutTimestamp = selectedTimestamp
                 checkOutDateTextView
-                    .text = SimpleDateFormat("MM/dd/yyyy").format(selectedTimestamp.toDate())
+                    .text = SimpleDateFormat("dd/MM/yyyy").format(selectedTimestamp.toDate())
             }
         }
 
@@ -74,6 +74,10 @@ class RezervacijaActivity : AppCompatActivity() {
                         this, "Molim vas izaberite datum odlaska.", Toast.LENGTH_SHORT
                     ).show()
                 }
+            } else if(checkInTimestamp!!.compareTo(checkOutTimestamp!!) > 0) {
+                Toast.makeText(
+                    this, "Datum odlaska ne moze biti prije datuma dolaska.", Toast.LENGTH_SHORT
+                ).show()
             } else {
                 addRezarvaciju(checkInTimestamp!!, checkOutTimestamp!!)
             }
