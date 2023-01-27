@@ -24,7 +24,6 @@ class PregledSobeActivity : AppCompatActivity() {
             .load(imageUrl)
             .into(roomImage)
 
-
         val tvOznakaSobe = findViewById<TextView>(R.id.tv_oznaka_sobe)
         tvOznakaSobe.text = "Oznaka sobe: $oznaka"
 
