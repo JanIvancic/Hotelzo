@@ -133,12 +133,12 @@ class RezervacijaActivity : AppCompatActivity() {
     private fun getCurrentUserName() {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
-            val userId = user.uid
-            db.collection("korisnik").document(userId)
+            db.collection("Korisnik").document(user.uid)
                 .get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
-                        userName = "${document.getString("ime")} ${document.getString("prezime")}"
+                        userName = document.getString("ime")?: ""
+                        Log.d("IME", userName)
                     }
                 }
                 .addOnFailureListener {
@@ -146,8 +146,6 @@ class RezervacijaActivity : AppCompatActivity() {
                 }
         }
     }
-
-
 
 
 
