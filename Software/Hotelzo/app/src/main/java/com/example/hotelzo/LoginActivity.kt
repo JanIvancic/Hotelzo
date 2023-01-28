@@ -84,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                 progressDialog.dismiss()
                 val firebaseUser = firebaseAuth.currentUser
                 val email = firebaseUser!!.email
-                // Access Firestore and get the user's document
+
                 val firestore = FirebaseFirestore.getInstance()
                 firestore.collection("Korisnik")
                     .whereEqualTo("mail", email)

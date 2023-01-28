@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Switch
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -49,12 +50,13 @@ class PregledRezervacijaKorisnikaAcitivty : AppCompatActivity() {
             getLoggedInUserInfo()
         }
 
+
     }
 
     private fun getReservations(ime: String) {
         if (showActive) {
             db.collection("Rezervacija")
-                .whereGreaterThan("datum_kraj", currentDate)
+                //.whereGreaterThan("datum_kraj", currentDate)
                 .whereEqualTo("ime", ime)
                 .get().addOnSuccessListener {
                     getData(it.documents)
@@ -62,7 +64,7 @@ class PregledRezervacijaKorisnikaAcitivty : AppCompatActivity() {
 
         } else {
             db.collection("Rezervacija")
-                .whereLessThan("datum_kraj", currentDate)
+                //.whereLessThan("datum_kraj", currentDate)
                 .whereEqualTo("ime", ime)
                 .get().addOnSuccessListener {
                     getData(it.documents)
@@ -84,7 +86,17 @@ class PregledRezervacijaKorisnikaAcitivty : AppCompatActivity() {
             }
     }
 
-
+    fun deleteReservation(oznakaSobe: String, datumKraj: String) {
+        db.collection("Rezervacija")
+            .whereEqualTo("oznaka_sobe", oznakaSobe)
+            .whereEqualTo("datum_kraj", datumKraj)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    document.reference.delete()
+                }
+            }
+    }
 
 
 
