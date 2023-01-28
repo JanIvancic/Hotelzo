@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import java.util.regex.Pattern
@@ -18,12 +19,12 @@ class Registration : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
 
-    private var email: String = ""
-    private var password: String = ""
-    private var confirmPassword: String = ""
-    private var phoneNumber: String = ""
-    private var name: String = ""
-    private var username: String = ""
+    private lateinit var email: String
+    private lateinit var password: String
+    private lateinit var confirmPassword: String
+    private lateinit var phoneNumber: String
+    private lateinit var name: String
+    private lateinit var username: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
