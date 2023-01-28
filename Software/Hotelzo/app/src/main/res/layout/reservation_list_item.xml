@@ -88,6 +88,14 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
             </LinearLayout>
+            <ImageView
+                android:id="@+id/btn_delete_reservation"
+                android:layout_marginLeft="130dp"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_reset_filter"/>
+
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

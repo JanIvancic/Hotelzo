@@ -94,10 +94,10 @@ class LoginActivity : AppCompatActivity() {
                             val uloga:String = document["uloga"].toString()
                             if (uloga == "admin") {
                                 Toast.makeText(this, "Prijavljeni ste kao admin", Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this, MainActivity::class.java))
+                                startActivity(Intent(this, PregledRezervacijaKorisnikaAcitivty::class.java))
                                 finish()
                             } else {
-                                startActivity(Intent(this, MainActivity::class.java))
+                                startActivity(Intent(this, PregledRezervacijaKorisnikaAcitivty::class.java))
                                 finish()
                             }
                         }
