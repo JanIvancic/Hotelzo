@@ -88,7 +88,9 @@ class Registration : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     AddUserToDatabase()
-                    startActivity(Intent(this,MainActivity::class.java))
+                    val intent = Intent(this,MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
                 } else {
                     Toast.makeText(baseContext, getString(R.string.register_error), Toast.LENGTH_SHORT).show()
                 }
@@ -100,7 +102,6 @@ class Registration : AppCompatActivity() {
         val newUser = hashMapOf(
             "broj_telefona" to phoneNumber,
             "ime" to name,
-            "lozinka" to password,
             "mail" to email,
             "korisnicko_ime" to username,
             "uloga" to getString(R.string.guest_role)
