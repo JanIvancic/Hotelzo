@@ -27,10 +27,6 @@ class RoomAdapter(private val roomList:ArrayList<Room>) : RecyclerView.Adapter<R
         val opis_sobe : TextView = itemView.findViewById(R.id.room_description)
         val image : ImageView = itemView.findViewById(R.id.room_image)
         val capacity: TextView = itemView.findViewById(R.id.room_capacity)
-
-        //dodano JI
-        val floatButton: com.google.android.material.floatingactionbutton.FloatingActionButton = itemView.findViewById(R.id.floating_action_button)
-
     }
 
 
@@ -66,34 +62,7 @@ class RoomAdapter(private val roomList:ArrayList<Room>) : RecyclerView.Adapter<R
 
             holder.itemView.context.startActivity(intent)
         }
-        //dodano JI
-        holder.floatButton.setOnClickListener {
-            showOptions(holder.floatButton,holder.itemView)
-        }
 
-
-    }
-
-    //dodano JI
-    private fun showOptions(floatingActionButton: FloatingActionButton, itemView: View) {
-        val popupMenu = PopupMenu(itemView.context as AppCompatActivity, floatingActionButton)
-        popupMenu.inflate(R.menu.popup_izbornik)
-        popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.menu_item_1 -> {
-                    val intent = Intent(itemView.context, MainActivity::class.java)
-                    itemView.context.startActivity(intent)
-                    return@OnMenuItemClickListener true
-                }
-                R.id.menu_item_2 -> {
-                    return@OnMenuItemClickListener true
-                }
-                else -> {
-                    return@OnMenuItemClickListener false
-                }
-            }
-        })
-        popupMenu.show()
     }
 
     override fun getItemCount(): Int {

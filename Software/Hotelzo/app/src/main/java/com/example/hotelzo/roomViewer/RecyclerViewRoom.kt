@@ -1,6 +1,7 @@
 package com.example.hotelzo.roomViewer
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,7 +9,12 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hotelzo.LoginActivity
+import com.example.hotelzo.MainActivity
 import com.example.hotelzo.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -23,9 +29,13 @@ class RecyclerViewRoom : AppCompatActivity() {
         setContentView(R.layout.room_list)
         val btnBack = findViewById<ImageView>(R.id.back_arrow)
         val btnResetFilters = findViewById<ImageView>(R.id.imageView_reset_filter)
+        val floatButton: com.google.android.material.floatingactionbutton.FloatingActionButton = findViewById(R.id.floating_action_button)
 
 
 
+        floatButton.setOnClickListener {
+            showOptions(floatButton,it)
+        }
         btnBack.setOnClickListener{
             finish()
         }
@@ -130,5 +140,35 @@ class RecyclerViewRoom : AppCompatActivity() {
             .addOnFailureListener {
                 Toast.makeText( this, it.toString(), Toast.LENGTH_SHORT).show()
             }
+    }
+    private fun showOptions(floatingActionButton: FloatingActionButton, itemView: View) {
+        val popupMenu = PopupMenu(itemView.context as AppCompatActivity, floatingActionButton)
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val rezervacijeRef = FirebaseFirestore.getInstance().collection("Rezervacije")
+        popupMenu.inflate(R.menu.popup_izbornik)
+        popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.menu_item_1 -> {
+
+                    return@OnMenuItemClickListener true
+                }
+                R.id.menu_item_2 -> {
+                    logoutUser()
+                    return@OnMenuItemClickListener true
+                }
+                else -> {
+                    return@OnMenuItemClickListener false
+                }
+            }
+        })
+        popupMenu.show()
+    }
+
+    private fun logoutUser() {
+        val firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.signOut()
+        val loginIntent = Intent(this, LoginActivity::class.java)
+        startActivity(loginIntent)
+        finish()
     }
 }
