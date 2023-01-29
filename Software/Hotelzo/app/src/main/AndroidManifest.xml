@@ -12,13 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hotelzo"
         tools:targetApi="31">
-        <activity
-            android:name=".PregledRezervacijaKorisnikaAcitivty"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".AllReservationsActivity"
             android:exported="false">

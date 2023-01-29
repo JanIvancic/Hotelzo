@@ -9,9 +9,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hotelzo.LoginActivity
-import com.example.hotelzo.MainActivity
-import com.example.hotelzo.R
+import com.example.hotelzo.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentChange
@@ -149,7 +147,8 @@ class RecyclerViewRoom : AppCompatActivity() {
         popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.menu_item_1 -> {
-
+                    val intent = Intent(this, AllReservationsActivity::class.java)
+                    startActivity(intent)
                     return@OnMenuItemClickListener true
                 }
                 R.id.menu_item_2 -> {
