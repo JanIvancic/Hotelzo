@@ -1,14 +1,24 @@
 package com.example.hotelzo.roomViewer
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hotelzo.R
 import com.bumptech.glide.Glide
+import com.example.hotelzo.PregledSobeActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
+import com.example.hotelzo.MainActivity
+import com.example.hotelzo.Registration
+
 
 class RoomAdapter(private val roomList:ArrayList<Room>) : RecyclerView.Adapter<RoomAdapter.MyViewHolder>() {
 
@@ -19,9 +29,10 @@ class RoomAdapter(private val roomList:ArrayList<Room>) : RecyclerView.Adapter<R
         val capacity: TextView = itemView.findViewById(R.id.room_capacity)
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.room_list_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.room_list_item, parent, false)
+
         Log.d("RoomAdapter", "View inflated successfully")
         return MyViewHolder(itemView)
     }
@@ -32,6 +43,25 @@ class RoomAdapter(private val roomList:ArrayList<Room>) : RecyclerView.Adapter<R
         Glide.with(holder.itemView.context)
             .load(roomList[position].slika_url)
             .into(holder.image)
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, PregledSobeActivity::class.java)
+
+            if(roomList[position].oznaka!=null){
+                intent.putExtra("oznaka", roomList[position].oznaka)
+                Log.d("OZNAKA", roomList[position].oznaka.toString())
+            }
+            Log.d("OZNAKA2", roomList[position].oznaka.toString())
+            if(roomList[position].opis_sobe!=null){
+                intent.putExtra("opis_sobe", roomList[position].opis_sobe)
+            }
+
+            intent.putExtra("cijena_sobe", roomList[position].cijena_sobe)
+            intent.putExtra("kapacitet", roomList[position].kapacitet)
+            intent.putExtra("image_url", roomList[position].slika_url)
+
+            holder.itemView.context.startActivity(intent)
+        }
 
     }
 

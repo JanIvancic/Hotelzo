@@ -25,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        checkUser()
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -38,8 +39,8 @@ class LoginActivity : AppCompatActivity() {
         progressDialog.setCanceledOnTouchOutside(false)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        FirebaseAuth.getInstance().signOut();
-        checkUser()
+
+
 
         //REGISTRACIJA
         val registracija = binding.lblRegistracija
@@ -70,10 +71,26 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun checkUser() {
-        val firebaseUser = firebaseAuth.currentUser
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
         if (firebaseUser != null) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            val email = firebaseUser!!.email
+
+            val firestore = FirebaseFirestore.getInstance()
+            firestore.collection("Korisnik")
+                .whereEqualTo("mail", email)
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        val uloga:String = document["uloga"].toString()
+                        if (uloga == "admin") {
+                            startActivity(Intent(this, AllReservationsActivity::class.java))
+                            finish()
+                        } else {
+                            startActivity(Intent(this, RecyclerViewRoom::class.java))
+                            finish()
+                        }
+                    }
+                }
         }
     }
 
@@ -84,7 +101,7 @@ class LoginActivity : AppCompatActivity() {
                 progressDialog.dismiss()
                 val firebaseUser = firebaseAuth.currentUser
                 val email = firebaseUser!!.email
-                // Access Firestore and get the user's document
+
                 val firestore = FirebaseFirestore.getInstance()
                 firestore.collection("Korisnik")
                     .whereEqualTo("mail", email)
@@ -94,10 +111,10 @@ class LoginActivity : AppCompatActivity() {
                             val uloga:String = document["uloga"].toString()
                             if (uloga == "admin") {
                                 Toast.makeText(this, "Prijavljeni ste kao admin", Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this, MainActivity::class.java))
+                                startActivity(Intent(this, AllReservationsActivity::class.java))
                                 finish()
                             } else {
-                                startActivity(Intent(this, RezervacijaActivity::class.java))
+                                startActivity(Intent(this, RecyclerViewRoom::class.java))
                                 finish()
                             }
                         }
@@ -108,10 +125,4 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Neuspješna prijava", Toast.LENGTH_SHORT).show()
             }
     }
-
-
-
-
-
-
 }
