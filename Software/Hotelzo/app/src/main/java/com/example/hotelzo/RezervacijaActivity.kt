@@ -123,39 +123,42 @@ class RezervacijaActivity : AppCompatActivity() {
 
     private fun checkForReservationConflict(checkInTimestamp: Timestamp, checkOutTimestamp: Timestamp) {
         var conflictFound = false
-        getCurrentUserName { ime ->
-            Log.d("TAG", ime)
+        getCurrentUserName { name ->
+            if (checkInTimestamp.toDate().before(Date())) {
+                Toast.makeText(this, "Datum dolaska ne može biti prije trenutnog datuma.", Toast.LENGTH_SHORT).show()
+                conflictFound = true
+            } else if (checkOutTimestamp.toDate().before(checkInTimestamp.toDate())) {
+                Toast.makeText(this, "Datum odlaska ne može biti prije datuma dolaska.", Toast.LENGTH_SHORT).show()
+                conflictFound = true
+            }
 
-            db.collection("Rezervacija")
-                .get()
-                .addOnSuccessListener { documents ->
-                    for (document in documents) {
-                        val existingCheckInTimestamp = document.getTimestamp("datum_pocetak")
-                        val existingCheckOutTimestamp = document.getTimestamp("datum_kraj")
-                        if (checkInTimestamp.toDate().after(existingCheckInTimestamp!!.toDate()) && checkInTimestamp.toDate().before(existingCheckOutTimestamp!!.toDate()) ||
-                            checkOutTimestamp.toDate().after(existingCheckInTimestamp.toDate()) && checkOutTimestamp.toDate().before(existingCheckInTimestamp?.toDate()) ||
-                            checkInTimestamp.toDate().equals(existingCheckInTimestamp.toDate()) || checkOutTimestamp.toDate().equals(existingCheckOutTimestamp?.toDate())) {
-                            Toast.makeText(
-                                this, "Već postoji rezervacija za odabrani datum. Molimo odaberite drugi datum.", Toast.LENGTH_SHORT
-                            ).show()
-                            conflictFound = true
-                            break
+            if (!conflictFound) {
+                db.collection("Rezervacija")
+                    .get()
+                    .addOnSuccessListener { documents ->
+                        for (document in documents) {
+                            val existingCheckInTimestamp = document.getTimestamp("datum_pocetak")
+                            val existingCheckOutTimestamp = document.getTimestamp("datum_kraj")
+                            if ((checkInTimestamp.toDate().after(existingCheckInTimestamp!!.toDate()) && checkInTimestamp.toDate().before(existingCheckOutTimestamp!!.toDate())) ||
+                                (checkOutTimestamp.toDate().after(existingCheckInTimestamp.toDate()) && checkOutTimestamp.toDate().before(existingCheckOutTimestamp!!.toDate())) ||
+                                (checkInTimestamp.toDate().equals(existingCheckInTimestamp.toDate())) || (checkOutTimestamp.toDate().equals(existingCheckOutTimestamp!!.toDate()))) {
+                                Toast.makeText(
+                                    this, "Već postoji rezervacija za odabrani datum. Molimo odaberite drugi datum.", Toast.LENGTH_SHORT
+                                ).show()
+                                conflictFound = true
+                                break
+                            }
+                        }
+                        if (!conflictFound) {
+                            addRezarvaciju(checkInTimestamp, checkOutTimestamp, name)
                         }
                     }
-                    if (!conflictFound) {
-                        addRezarvaciju(checkInTimestamp, checkOutTimestamp,ime)
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Pogreška pri dohvaćanju postojećih rezervacija. Molimo pokušajte ponovno.", Toast.LENGTH_SHORT).show()
                     }
-                }
-                .addOnFailureListener {
-                    Toast.makeText(this, "Pogreška pri dohvaćanju postojećih rezervacija. Molimo pokušajte ponovno.", Toast.LENGTH_SHORT).show()
-                }
+            }
         }
     }
-
-
-
-
-
 
 
 }
