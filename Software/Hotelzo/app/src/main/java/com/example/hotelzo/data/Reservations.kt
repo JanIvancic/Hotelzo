@@ -4,5 +4,6 @@ data class Reservations(
     val end_date: String? = null,
     var start_date: String? = null,
     val name: String? = null,
-    val room_label: String? = null
+    val room_label: String? = null,
+    val document_id: String? = null
 )
