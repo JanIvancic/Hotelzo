@@ -1,5 +1,6 @@
 package com.example.hotelzo
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -7,6 +8,7 @@ import android.widget.CalendarView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.hotelzo.roomViewer.RecyclerViewRoom
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import java.lang.String.format
@@ -35,8 +37,11 @@ class RezervacijaActivity : AppCompatActivity() {
         val removePrvi = findViewById<TextView>(R.id.removePrvi)
         val removeDrugi = findViewById<TextView>(R.id.removeDrugi)
         val calendarView = findViewById<CalendarView>(R.id.calendar_view)
+        val oznaka = intent.getStringExtra("oznaka")
 
-        setUpReservationButton()
+        if (oznaka != null) {
+            setUpReservationButton(oznaka)
+        }
 
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val selectedDate = Calendar.getInstance()
@@ -62,7 +67,7 @@ class RezervacijaActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUpReservationButton() {
+    private fun setUpReservationButton(oznaka: String) {
         val btn_rezerviraj = findViewById<Button>(R.id.btn_rezerviraj)
         val ime = userName
         btn_rezerviraj.setOnClickListener {
@@ -81,29 +86,32 @@ class RezervacijaActivity : AppCompatActivity() {
                     ).show()
                 }
             } else {
-                checkForReservationConflict(checkInTimestamp!!, checkOutTimestamp!!)
+                checkForReservationConflict(checkInTimestamp!!, checkOutTimestamp!!,oznaka)
             }
         }
 
     }
 
-    private fun addRezarvaciju(checkInTimestamp: Timestamp, checkOutTimestamp: Timestamp, ime: String) {
+    private fun addRezarvaciju(checkInTimestamp: Timestamp, checkOutTimestamp: Timestamp, ime: String, oznaka: String) {
         val dbReference = db.collection("Rezervacija")
         Log.d("REZIME", ime)
         val newRezervacija = hashMapOf(
             "datum_kraj" to checkOutTimestamp,
             "datum_pocetak" to checkInTimestamp,
-            "ime" to ime
+            "ime" to ime,
+            "oznaka" to oznaka
         )
         dbReference.add(newRezervacija)
             .addOnSuccessListener {
                 Toast.makeText(this, "Rezervacija uspješno kreirana", Toast.LENGTH_SHORT).show()
-                finish()
+                val intent = Intent(this, RecyclerViewRoom::class.java)
+                startActivity(intent)
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Greška: $e", Toast.LENGTH_SHORT).show()
             }
     }
+
 
     private fun getCurrentUserName(callback: (String) -> Unit) {
         val email = FirebaseAuth.getInstance().currentUser!!.email
@@ -121,7 +129,7 @@ class RezervacijaActivity : AppCompatActivity() {
             }
     }
 
-    private fun checkForReservationConflict(checkInTimestamp: Timestamp, checkOutTimestamp: Timestamp) {
+    private fun checkForReservationConflict(checkInTimestamp: Timestamp, checkOutTimestamp: Timestamp, oznaka: String) {
         var conflictFound = false
         getCurrentUserName { name ->
             if (checkInTimestamp.toDate().before(Date())) {
@@ -137,6 +145,9 @@ class RezervacijaActivity : AppCompatActivity() {
                     .get()
                     .addOnSuccessListener { documents ->
                         for (document in documents) {
+                            if (document.getString("oznaka_sobe") != oznaka) {
+                                continue
+                            }
                             val existingCheckInTimestamp = document.getTimestamp("datum_pocetak")
                             val existingCheckOutTimestamp = document.getTimestamp("datum_kraj")
                             if ((checkInTimestamp.toDate().after(existingCheckInTimestamp!!.toDate()) && checkInTimestamp.toDate().before(existingCheckOutTimestamp!!.toDate())) ||
@@ -150,7 +161,7 @@ class RezervacijaActivity : AppCompatActivity() {
                             }
                         }
                         if (!conflictFound) {
-                            addRezarvaciju(checkInTimestamp, checkOutTimestamp, name)
+                            addRezarvaciju(checkInTimestamp, checkOutTimestamp, name, oznaka)
                         }
                     }
                     .addOnFailureListener {
