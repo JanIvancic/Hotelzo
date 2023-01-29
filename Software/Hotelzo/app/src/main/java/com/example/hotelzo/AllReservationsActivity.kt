@@ -4,11 +4,14 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import android.widget.Switch
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hotelzo.adapters.ReservationsAdapter
 import com.example.hotelzo.data.Reservations
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
@@ -27,6 +30,7 @@ class AllReservationsActivity : AppCompatActivity() {
 
     private var showActive: Boolean = true
     private lateinit var currentDate: Date
+    private var gumb:Boolean=true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,14 +44,45 @@ class AllReservationsActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         switch = findViewById(R.id.sw_prijasnje)
 
-        getReservations()
+        getLoggedInUserInfo()
 
+        hideBar()
         switch.setOnCheckedChangeListener { buttonView, isChecked ->
             reservationList.clear()
             showActive = !isChecked
-            getReservations()
+            gumb=!isChecked
+            getLoggedInUserInfo()
         }
 
+    }
+
+    private fun hideBar() {
+        val email = FirebaseAuth.getInstance().currentUser!!.email
+        db.collection("Korisnik")
+            .whereEqualTo("mail", email)
+            .get()
+            .addOnSuccessListener {
+                if (!it.isEmpty) {
+                    val uloga = it.documents[0]["uloga"].toString()
+
+                    if(uloga=="admin")
+                    {
+                        val topBarBack=findViewById<View>(R.id.top_bar_back)
+                        topBarBack.visibility=View.GONE
+                    }
+                    else
+                    {
+                        val topBar=findViewById<View>(R.id.top_bar)
+                        topBar.visibility=View.GONE
+                        val btnBack = findViewById<ImageView>(R.id.back_arrow)
+
+                        btnBack.setOnClickListener{
+                            finish()
+                        }
+
+                    }
+                }
+            }
     }
 
     fun deleteReservation(id: String?) {
@@ -61,25 +96,73 @@ class AllReservationsActivity : AppCompatActivity() {
             }
     }
 
-    private fun getReservations(){
-        if(showActive){
-            db.collection("Rezervacija")
-                .whereGreaterThan("datum_kraj", currentDate)
-                .get().addOnSuccessListener {
-                    getData(it.documents)
-                }
-        } else {
-            db.collection("Rezervacija")
-                .whereLessThan("datum_kraj", currentDate)
-                .get().addOnSuccessListener {
-                    getData(it.documents)
-                }
+    private fun getReservations(ime: String,uloga:String) {
+        if(uloga=="admin")
+        {
+            if(showActive){
+                db.collection("Rezervacija")
+                    .whereGreaterThan("datum_kraj", currentDate)
+                    .get().addOnSuccessListener {
+                        getData(it.documents,uloga)
+                    }
+            } else {
+                db.collection("Rezervacija")
+                    .whereLessThan("datum_kraj", currentDate)
+                    .get().addOnSuccessListener {
+                        getData(it.documents,uloga)
+                    }
+            }
+
+        }
+        else{
+            if (showActive) {
+                db.collection("Rezervacija")
+                    .whereEqualTo("ime", ime)
+                    .get()
+                    .addOnSuccessListener {
+                        val filteredDocs = it.documents.filter { document ->
+                            val date = document.get("datum_kraj") as com.google.firebase.Timestamp
+                            date.toDate() > currentDate
+                        }
+                        getData(filteredDocs.toMutableList(),uloga)
+                    }
+
+
+            } else {
+                db.collection("Rezervacija")
+                    .whereEqualTo("ime", ime)
+                    .get().addOnSuccessListener {
+                        val filteredDocs = it.documents.filter { document ->
+                            val date = document.get("datum_kraj") as com.google.firebase.Timestamp
+                            date.toDate() < currentDate
+                        }
+                        getData(filteredDocs.toMutableList(),uloga)
+                    }
+            }
         }
 
     }
 
+
+    private fun getLoggedInUserInfo() {
+        val email = FirebaseAuth.getInstance().currentUser!!.email
+        db.collection("Korisnik")
+            .whereEqualTo("mail", email)
+            .get()
+            .addOnSuccessListener {
+                if (!it.isEmpty) {
+                    val ime = it.documents[0]["ime"].toString()
+                    val uloga = it.documents[0]["uloga"].toString()
+                    Log.d("IME", "getLoggedInUserInfo: $ime")
+                    Log.d("ULOGA", "getLoggedInUserInfo: $uloga")
+                    getReservations(ime, uloga)
+                }
+            }
+    }
+
+
     @SuppressLint("SimpleDateFormat")
-    private fun getData(documents: MutableList<DocumentSnapshot>) {
+    private fun getData(documents: MutableList<DocumentSnapshot>,uloga: String) {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy")
 
         for (data in documents){
@@ -98,6 +181,7 @@ class AllReservationsActivity : AppCompatActivity() {
             val reservation = Reservations(end_date = end_date, start_date = start_date, name = name, room_label = room_label, document_id = id)
             reservationList.add(reservation)
         }
-        recyclerView.adapter = ReservationsAdapter(reservationList, this)
+
+        recyclerView.adapter = ReservationsAdapter(reservationList, this,gumb,uloga)
     }
 }

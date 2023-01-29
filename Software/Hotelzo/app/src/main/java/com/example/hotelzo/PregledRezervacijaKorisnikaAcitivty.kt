@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
 import android.widget.Switch
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +18,7 @@ import java.util.Date
 import kotlin.collections.ArrayList
 
 class PregledRezervacijaKorisnikaAcitivty : AppCompatActivity() {
-
+/*
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var switch: Switch
     private lateinit var recyclerView: RecyclerView
@@ -53,24 +52,45 @@ class PregledRezervacijaKorisnikaAcitivty : AppCompatActivity() {
 
     }
 
-    private fun getReservations(ime: String) {
-        if (showActive) {
-            db.collection("Rezervacija")
-                //.whereGreaterThan("datum_kraj", currentDate)
-                .whereEqualTo("ime", ime)
-                .get().addOnSuccessListener {
-                    getData(it.documents)
-                }
+    private fun getReservations(ime: String,uloga:String) {
+        if(uloga=="admin")
+        {
+            if(showActive){
+                db.collection("Rezervacija")
+                    .whereGreaterThan("datum_kraj", currentDate)
+                    .get().addOnSuccessListener {
+                        getData(it.documents)
+                    }
+            } else {
+                db.collection("Rezervacija")
+                    .whereLessThan("datum_kraj", currentDate)
+                    .get().addOnSuccessListener {
+                        getData(it.documents)
+                    }
+            }
 
-        } else {
-            db.collection("Rezervacija")
-                //.whereLessThan("datum_kraj", currentDate)
-                .whereEqualTo("ime", ime)
-                .get().addOnSuccessListener {
-                    getData(it.documents)
-                }
         }
+        else{
+            if (showActive) {
+                db.collection("Rezervacija")
+                    //.whereGreaterThan("datum_kraj", currentDate)
+                    .whereEqualTo("ime", ime)
+                    .get().addOnSuccessListener {
+                        getData(it.documents)
+                    }
+
+            } else {
+                db.collection("Rezervacija")
+                    //.whereLessThan("datum_kraj", currentDate)
+                    .whereEqualTo("ime", ime)
+                    .get().addOnSuccessListener {
+                        getData(it.documents)
+                    }
+            }
+        }
+
     }
+
 
     private fun getLoggedInUserInfo() {
         val email = FirebaseAuth.getInstance().currentUser!!.email
@@ -80,20 +100,10 @@ class PregledRezervacijaKorisnikaAcitivty : AppCompatActivity() {
             .addOnSuccessListener {
                 if (!it.isEmpty) {
                     val ime = it.documents[0]["ime"].toString()
+                    val uloga = it.documents[0]["uloga"].toString()
                     Log.d("IME", "getLoggedInUserInfo: $ime")
-                    getReservations(ime)
-                }
-            }
-    }
-
-    fun deleteReservation(oznakaSobe: String, datumKraj: String) {
-        db.collection("Rezervacija")
-            .whereEqualTo("oznaka_sobe", oznakaSobe)
-            .whereEqualTo("datum_kraj", datumKraj)
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    document.reference.delete()
+                    Log.d("ULOGA", "getLoggedInUserInfo: $uloga")
+                    getReservations(ime, uloga)
                 }
             }
     }
@@ -118,6 +128,7 @@ class PregledRezervacijaKorisnikaAcitivty : AppCompatActivity() {
             val reservation = Reservations(end_date = end_date, start_date = start_date, name = name, room_label = room_label)
             reservationList.add(reservation)
         }
-        recyclerView.adapter = ReservationsAdapter(reservationList)
+        recyclerView.adapter = ReservationsAdapter(reservationList,this)
     }
+    */
 }
