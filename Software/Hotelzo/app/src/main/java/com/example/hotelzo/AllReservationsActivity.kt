@@ -3,6 +3,7 @@ package com.example.hotelzo
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Switch
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -49,6 +50,17 @@ class AllReservationsActivity : AppCompatActivity() {
 
     }
 
+    fun deleteReservation(id: String?) {
+        val dohvaceniId = db.collection("Rezervacija").document(id!!)
+        dohvaceniId.delete()
+            .addOnSuccessListener {
+                Log.d("Uspjesno", "Rezervacija ($id) je uspjesno izbrisana")
+            }
+            .addOnFailureListener { exception ->
+                Log.w("Neuspjesno", "Pogreška kod brisanje rezervacije", exception)
+            }
+    }
+
     private fun getReservations(){
         if(showActive){
             db.collection("Rezervacija")
@@ -81,9 +93,11 @@ class AllReservationsActivity : AppCompatActivity() {
             val name:String = data["ime"].toString()
             val room_label:String = data["oznaka_sobe"].toString()
 
-            val reservation = Reservations(end_date = end_date, start_date = start_date, name = name, room_label = room_label)
+            val id : String = data.id
+
+            val reservation = Reservations(end_date = end_date, start_date = start_date, name = name, room_label = room_label, document_id = id)
             reservationList.add(reservation)
         }
-        recyclerView.adapter = ReservationsAdapter(reservationList)
+        recyclerView.adapter = ReservationsAdapter(reservationList, this)
     }
 }
