@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hotelzo.AllReservationsActivity
-import com.example.hotelzo.PregledRezervacijaKorisnikaAcitivty
 import com.example.hotelzo.R
 import com.example.hotelzo.data.Reservations
 
