@@ -13,6 +13,8 @@ import java.lang.String.format
 import java.text.SimpleDateFormat
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import java.util.*
 
 class RezervacijaActivity : AppCompatActivity() {
@@ -62,6 +64,7 @@ class RezervacijaActivity : AppCompatActivity() {
 
     private fun setUpReservationButton() {
         val btn_rezerviraj = findViewById<Button>(R.id.btn_rezerviraj)
+        val ime = userName
         btn_rezerviraj.setOnClickListener {
             if (checkInTimestamp == null || checkOutTimestamp == null) {
                 if (checkInTimestamp == null && checkOutTimestamp == null) {
@@ -84,12 +87,13 @@ class RezervacijaActivity : AppCompatActivity() {
 
     }
 
-    private fun addRezarvaciju(checkInTimestamp: Timestamp, checkOutTimestamp: Timestamp) {
+    private fun addRezarvaciju(checkInTimestamp: Timestamp, checkOutTimestamp: Timestamp, ime: String) {
         val dbReference = db.collection("Rezervacija")
+        Log.d("REZIME", ime)
         val newRezervacija = hashMapOf(
             "datum_kraj" to checkOutTimestamp,
             "datum_pocetak" to checkInTimestamp,
-            "ime" to userName
+            "ime" to ime
         )
         dbReference.add(newRezervacija)
             .addOnSuccessListener {
@@ -101,51 +105,55 @@ class RezervacijaActivity : AppCompatActivity() {
             }
     }
 
-    private fun checkForReservationConflict(checkInTimestamp: Timestamp, checkOutTimestamp: Timestamp) {
-        var conflictFound = false
-        db.collection("Rezervacija")
+    private fun getCurrentUserName(callback: (String) -> Unit) {
+        val email = FirebaseAuth.getInstance().currentUser!!.email
+        var ime: String = ""
+
+        db.collection("Korisnik")
+            .whereEqualTo("mail", email)
             .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val existingCheckInTimestamp = document.getTimestamp("datum_pocetak")
-                    val existingCheckOutTimestamp = document.getTimestamp("datum_kraj")
-                    if (checkInTimestamp.toDate().after(existingCheckInTimestamp!!.toDate()) && checkInTimestamp.toDate().before(existingCheckOutTimestamp!!.toDate()) ||
-                        checkOutTimestamp.toDate().after(existingCheckInTimestamp.toDate()) && checkOutTimestamp.toDate().before(existingCheckInTimestamp?.toDate()) ||
-                        checkInTimestamp.toDate().equals(existingCheckInTimestamp.toDate()) || checkOutTimestamp.toDate().equals(existingCheckOutTimestamp?.toDate())) {
-                        Toast.makeText(
-                            this, "Već postoji rezervacija za odabrani datum. Molimo odaberite drugi datum.", Toast.LENGTH_SHORT
-                        ).show()
-                        conflictFound = true
-                        break
-                    }
+            .addOnSuccessListener {
+                if (!it.isEmpty) {
+                    ime = it.documents[0]["ime"].toString()
+                    Log.d("ime", ime)
+                    callback(ime)
                 }
-                if (!conflictFound) {
-                    getCurrentUserName()
-                    addRezarvaciju(checkInTimestamp, checkOutTimestamp)
-                }
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Pogreška pri dohvaćanju postojećih rezervacija. Molimo pokušajte ponovno.", Toast.LENGTH_SHORT).show()
             }
     }
 
+    private fun checkForReservationConflict(checkInTimestamp: Timestamp, checkOutTimestamp: Timestamp) {
+        var conflictFound = false
+        getCurrentUserName { ime ->
+            Log.d("TAG", ime)
 
-    private fun getCurrentUserName() {
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            db.collection("Korisnik").document(user.uid)
+            db.collection("Rezervacija")
                 .get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                        userName = document.getString("ime")?: ""
-                        Log.d("IME", userName)
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        val existingCheckInTimestamp = document.getTimestamp("datum_pocetak")
+                        val existingCheckOutTimestamp = document.getTimestamp("datum_kraj")
+                        if (checkInTimestamp.toDate().after(existingCheckInTimestamp!!.toDate()) && checkInTimestamp.toDate().before(existingCheckOutTimestamp!!.toDate()) ||
+                            checkOutTimestamp.toDate().after(existingCheckInTimestamp.toDate()) && checkOutTimestamp.toDate().before(existingCheckInTimestamp?.toDate()) ||
+                            checkInTimestamp.toDate().equals(existingCheckInTimestamp.toDate()) || checkOutTimestamp.toDate().equals(existingCheckOutTimestamp?.toDate())) {
+                            Toast.makeText(
+                                this, "Već postoji rezervacija za odabrani datum. Molimo odaberite drugi datum.", Toast.LENGTH_SHORT
+                            ).show()
+                            conflictFound = true
+                            break
+                        }
+                    }
+                    if (!conflictFound) {
+                        addRezarvaciju(checkInTimestamp, checkOutTimestamp,ime)
                     }
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this, "Pogreška pri dohvaćanju imena korisnika. Molimo pokušajte ponovno.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Pogreška pri dohvaćanju postojećih rezervacija. Molimo pokušajte ponovno.", Toast.LENGTH_SHORT).show()
                 }
         }
     }
+
+
+
 
 
 
