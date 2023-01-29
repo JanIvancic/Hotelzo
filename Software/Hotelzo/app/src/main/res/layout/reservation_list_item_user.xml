@@ -98,7 +98,7 @@
                 android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_reset_filter" />
+                app:srcCompat="@drawable/ic_delete" />
         </LinearLayout>
 
 

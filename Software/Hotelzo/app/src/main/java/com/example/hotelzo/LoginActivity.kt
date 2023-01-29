@@ -31,9 +31,6 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //actionBar = supportActionBar!!
-        //actionBar.title = "@string/login_text"
-
         progressDialog = ProgressDialog(this)
         progressDialog.setTitle(getString(R.string.pricekajte))
         progressDialog.setMessage(getString(R.string.prijava_u_tijeku))
@@ -126,10 +123,4 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Neuspješna prijava", Toast.LENGTH_SHORT).show()
             }
     }
-
-
-
-
-
-
 }

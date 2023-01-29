@@ -109,7 +109,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.019"
-        app:srcCompat="@drawable/ic_reset_filter" />
+        app:srcCompat="@drawable/ic_baseline_filter_alt_off_24" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
