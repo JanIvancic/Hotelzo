@@ -84,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                 progressDialog.dismiss()
                 val firebaseUser = firebaseAuth.currentUser
                 val email = firebaseUser!!.email
-                // Access Firestore and get the user's document
+
                 val firestore = FirebaseFirestore.getInstance()
                 firestore.collection("Korisnik")
                     .whereEqualTo("mail", email)
@@ -94,10 +94,10 @@ class LoginActivity : AppCompatActivity() {
                             val uloga:String = document["uloga"].toString()
                             if (uloga == "admin") {
                                 Toast.makeText(this, "Prijavljeni ste kao admin", Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this, MainActivity::class.java))
+                                startActivity(Intent(this, AllReservationsActivity::class.java))
                                 finish()
                             } else {
-                                startActivity(Intent(this, MainActivity::class.java))
+                                startActivity(Intent(this, AllReservationsActivity::class.java))
                                 finish()
                             }
                         }
