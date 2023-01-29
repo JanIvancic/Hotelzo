@@ -67,7 +67,6 @@ class LoginActivity : AppCompatActivity() {
             binding.etLozinka.error = "@string/greska"
         } else {
             firebaseLogin()
-
         }
     }
 
@@ -96,10 +95,10 @@ class LoginActivity : AppCompatActivity() {
                             val uloga:String = document["uloga"].toString()
                             if (uloga == "admin") {
                                 Toast.makeText(this, "Prijavljeni ste kao admin", Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this, AllReservationsActivity::class.java))
+                                startActivity(Intent(this, MainActivity::class.java))
                                 finish()
                             } else {
-                                startActivity(Intent(this, RecyclerViewRoom::class.java))
+                                startActivity(Intent(this, MainActivity::class.java))
                                 finish()
                             }
                         }
