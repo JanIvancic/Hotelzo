@@ -1,6 +1,7 @@
 package com.example.hotelzo
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -53,7 +54,6 @@ class AllReservationsActivity : AppCompatActivity() {
             gumb=!isChecked
             getLoggedInUserInfo()
         }
-
     }
 
     private fun hideBar() {
@@ -64,18 +64,25 @@ class AllReservationsActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 if (!it.isEmpty) {
                     val uloga = it.documents[0]["uloga"].toString()
+                    val fab=findViewById<View>(R.id.floating_action_button)
 
                     if(uloga=="admin")
                     {
                         val topBarBack=findViewById<View>(R.id.top_bar_back)
                         topBarBack.visibility=View.GONE
+
+                        fab.setOnClickListener(){
+                            logoutUser()
+                        }
                     }
                     else
                     {
                         val topBar=findViewById<View>(R.id.top_bar)
                         topBar.visibility=View.GONE
                         val btnBack = findViewById<ImageView>(R.id.back_arrow)
-
+                        fab.visibility=View.GONE
+                        val btnAdd=findViewById<ImageView>(R.id.btnAdd)
+                        btnAdd.visibility=View.GONE
                         btnBack.setOnClickListener{
                             finish()
                         }
@@ -160,6 +167,13 @@ class AllReservationsActivity : AppCompatActivity() {
             }
     }
 
+    private fun logoutUser() {
+        val firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.signOut()
+        val loginIntent = Intent(this, LoginActivity::class.java)
+        startActivity(loginIntent)
+        finish()
+    }
 
     @SuppressLint("SimpleDateFormat")
     private fun getData(documents: MutableList<DocumentSnapshot>,uloga: String) {
