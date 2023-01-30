@@ -3,10 +3,7 @@ package com.example.hotelzo
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.CalendarView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hotelzo.roomViewer.RecyclerViewRoom
 import com.google.firebase.firestore.FieldValue
@@ -38,7 +35,11 @@ class RezervacijaActivity : AppCompatActivity() {
         val removeDrugi = findViewById<TextView>(R.id.removeDrugi)
         val calendarView = findViewById<CalendarView>(R.id.calendar_view)
         val oznaka = intent.getStringExtra(getString(R.string.oznaka))
+        val btnBack = findViewById<ImageView>(R.id.back_arrow)
 
+        btnBack.setOnClickListener{
+            finish()
+        }
         if (oznaka != null) {
             setUpReservationButton(oznaka)
         }
