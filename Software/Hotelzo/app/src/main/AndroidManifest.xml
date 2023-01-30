@@ -13,6 +13,20 @@
         android:theme="@style/Theme.Hotelzo"
         tools:targetApi="31">
         <activity
+            android:name=".RezervacijaAdmin"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".RezervacijaActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AllReservationsActivity"
             android:exported="false">
             <meta-data
@@ -26,6 +40,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity android:name=".roomViewer.RecyclerViewRoom" />
         <activity
             android:name=".Registration"
             android:exported="false">
@@ -34,8 +49,9 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,6 +62,15 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity android:name=".PregledSobeActivity" />
     </application>
 
 </manifest>

@@ -90,6 +90,7 @@
             </LinearLayout>
 
             <ImageView
+                android:visibility="gone"
                 android:contentDescription="@string/content_description_gumb_za_brisanje"
                 android:id="@+id/btn_delete_reservation"
                 android:layout_marginStart="130dp"
