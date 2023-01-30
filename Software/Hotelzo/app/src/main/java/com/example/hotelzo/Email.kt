@@ -28,12 +28,11 @@ class Email {
             this.sendEmail(message, subject, email, name)
         }
 
-        fun sendReservationEmail(context: Context, email:String, name:String, dateStart: String, dateEnd: String, room:String, price:String){
+        fun sendReservationEmail(context: Context, email:String, name:String, dateStart: String, dateEnd: String, room:String){
             val message = context.getString(R.string.email_greeting) + " " +  name +  "<br>" +
                     context.getString(R.string.email_room_reserved) + " " +  room + "<br>" +
                     context.getString(R.string.email_reservation_start) + " " + dateStart + "<br>" +
                     context.getString(R.string.email_reservation_end) + " " + dateEnd + "<br>" +
-                    context.getString(R.string.email_price) + " " + price + "<br>" +
                     context.getString(R.string.email_farewell) + "<br>" +
                     context.getString(R.string.app_name)
 
