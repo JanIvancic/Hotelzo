@@ -4,20 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:ignore="ExtraText">
+    tools:ignore="ExtraText"
+    android:background="@color/background_color">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hotelzo"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:padding="20dp"
-        android:textSize="30sp"
-        android:textAlignment="center"
-        android:background="@color/top_bar"
-        android:textColor="@color/black"/>
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/top_bar">
+    </include>
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -25,13 +18,12 @@
         android:layout_above="@id/tilLozinka"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etMail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -49,7 +41,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etLozinka"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:padding="5dp"
@@ -57,11 +49,12 @@
     </com.google.android.material.textfield.TextInputLayout>
     <Button
         android:id="@+id/btnPrijava"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:text="@string/login"
         android:layout_below="@+id/tilLozinka"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="28dp"
         android:backgroundTint="@color/top_bar"
         android:textColor="@color/black"/>
 

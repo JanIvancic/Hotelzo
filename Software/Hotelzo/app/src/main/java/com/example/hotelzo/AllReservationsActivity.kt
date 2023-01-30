@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hotelzo.adapters.ReservationsAdapter
 import com.example.hotelzo.data.Reservations
+import com.example.hotelzo.static_class.Email
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -55,15 +56,15 @@ class AllReservationsActivity : AppCompatActivity() {
             getLoggedInUserInfo()
         }
 
-
+        //Luka Galjer
         val btnNewReservation = findViewById<ImageView>(R.id.btnAdd)
-
         btnNewReservation.setOnClickListener{
             val intent = Intent(this, RezervacijaAdmin::class.java)
             startActivity(intent)
         }
     }
 
+    //Jan Ivancic
     private fun hideBar() {
         val email = FirebaseAuth.getInstance().currentUser!!.email
         db.collection("Korisnik")
@@ -94,14 +95,12 @@ class AllReservationsActivity : AppCompatActivity() {
                         btnBack.setOnClickListener{
                             finish()
                         }
-
-
-
                     }
                 }
             }
     }
 
+    //Luka Galjer i Jan Ivancic
     fun deleteReservation(id: String?) {
         val dohvaceniId = db.collection("Rezervacija").document(id!!)
         dohvaceniId.delete()
@@ -114,9 +113,9 @@ class AllReservationsActivity : AppCompatActivity() {
             }
     }
 
+
     private fun getReservations(ime: String,uloga:String) {
-        if(uloga=="admin")
-        {
+        if(uloga=="admin") {
             if(showActive){
                 db.collection("Rezervacija")
                     .whereGreaterThan("datum_kraj", currentDate)
@@ -130,9 +129,8 @@ class AllReservationsActivity : AppCompatActivity() {
                         getData(it.documents,uloga)
                     }
             }
-
-        }
-        else{
+        } else {
+            //Jan Ivancic
             if (showActive) {
                 db.collection("Rezervacija")
                     .whereEqualTo("ime", ime)
@@ -144,8 +142,6 @@ class AllReservationsActivity : AppCompatActivity() {
                         }
                         getData(filteredDocs.toMutableList(),uloga)
                     }
-
-
             } else {
                 db.collection("Rezervacija")
                     .whereEqualTo("ime", ime)
@@ -161,7 +157,7 @@ class AllReservationsActivity : AppCompatActivity() {
 
     }
 
-
+    //Jan Ivancic
     private fun getLoggedInUserInfo() {
         val email = FirebaseAuth.getInstance().currentUser!!.email
         db.collection("Korisnik")
@@ -178,6 +174,7 @@ class AllReservationsActivity : AppCompatActivity() {
             }
     }
 
+    //Jan Ivancic
     private fun logoutUser() {
         val firebaseAuth = FirebaseAuth.getInstance()
         firebaseAuth.signOut()
@@ -186,12 +183,12 @@ class AllReservationsActivity : AppCompatActivity() {
         finish()
     }
 
+    //Mladen Kajic
     @SuppressLint("SimpleDateFormat")
     private fun getData(documents: MutableList<DocumentSnapshot>,uloga: String) {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy")
 
         for (data in documents){
-
             var timestamp = data["datum_pocetak"] as com.google.firebase.Timestamp
             val start_date = dateFormat.format(timestamp.toDate())
 
@@ -206,10 +203,10 @@ class AllReservationsActivity : AppCompatActivity() {
             val reservation = Reservations(end_date = end_date, start_date = start_date, name = name, room_label = room_label, document_id = id)
             reservationList.add(reservation)
         }
-
         recyclerView.adapter = ReservationsAdapter(reservationList, this,gumb,uloga)
     }
 
+    //Mladen Kajic
     private fun sendDeletionMail() {
         val email = FirebaseAuth.getInstance().currentUser!!.email
         db.collection("Korisnik")

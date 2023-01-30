@@ -1,18 +1,17 @@
-package com.example.hotelzo.roomViewer
+package com.example.hotelzo
 
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hotelzo.*
+import com.example.hotelzo.adapters.RoomAdapter
+import com.example.hotelzo.data.Room
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -25,18 +24,13 @@ class RecyclerViewRoom : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.room_list)
-        val btnBack = findViewById<ImageView>(R.id.back_arrow)
         val btnResetFilters = findViewById<ImageView>(R.id.imageView_reset_filter)
-        val floatButton: com.google.android.material.floatingactionbutton.FloatingActionButton = findViewById(R.id.floating_action_button)
-
-
+        val floatButton: FloatingActionButton = findViewById(R.id.floating_action_button)
 
         floatButton.setOnClickListener {
             showOptions(floatButton,it)
         }
-        btnBack.setOnClickListener{
-            finish()
-        }
+
         recyclerView = findViewById(R.id.recycler_view_rooms)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -51,7 +45,6 @@ class RecyclerViewRoom : AppCompatActivity() {
 
                     }
                 }
-                Log.d("RecyclerViewRoom", "Data loaded successfully")
                 recyclerView.adapter = RoomAdapter(roomList)
             }
 
@@ -139,10 +132,10 @@ class RecyclerViewRoom : AppCompatActivity() {
                 Toast.makeText( this, it.toString(), Toast.LENGTH_SHORT).show()
             }
     }
+
+    //Jan Ivancic
     private fun showOptions(floatingActionButton: FloatingActionButton, itemView: View) {
         val popupMenu = PopupMenu(itemView.context as AppCompatActivity, floatingActionButton)
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        val rezervacijeRef = FirebaseFirestore.getInstance().collection("Rezervacije")
         popupMenu.inflate(R.menu.popup_izbornik)
         popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
             when (item.itemId) {
@@ -163,6 +156,7 @@ class RecyclerViewRoom : AppCompatActivity() {
         popupMenu.show()
     }
 
+    //Jan Ivancic
     private fun logoutUser() {
         val firebaseAuth = FirebaseAuth.getInstance()
         firebaseAuth.signOut()

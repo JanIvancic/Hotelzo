@@ -28,7 +28,8 @@
             android:layout_width="117dp"
             android:layout_height="118dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_back_arrow" />
+            android:src="@drawable/ic_back_arrow"
+            android:contentDescription="@string/slika_desc" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -41,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:paddingStart="10dp"
-                android:text="Room Description"
+                android:text="@string/room_description"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -51,7 +52,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
-                android:text="Kapacitet"
+                android:text="@string/filter_kapacitet"
                 android:textColor="@color/gray"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -64,7 +65,7 @@
                 android:paddingStart="10dp"
                 android:textColor="@color/red"
                 android:textAlignment="textStart"
-                android:text="$100"
+                android:text="@string/prijedlog_cijene"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>

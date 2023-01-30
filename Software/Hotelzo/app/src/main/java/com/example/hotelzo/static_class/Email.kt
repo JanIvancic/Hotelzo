@@ -1,8 +1,9 @@
-package com.example.hotelzo
+package com.example.hotelzo.static_class
 
 
 import android.content.Context
 import android.util.Log
+import com.example.hotelzo.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,8 +23,7 @@ class Email {
                     context.getString(R.string.app_name)
 
             val subject = context.getString(R.string.email_subject_cancelled)
-
-            this.sendEmail(message, subject, email, name)
+            sendEmail(message, subject, email, name)
         }
 
         fun sendReservationEmail(context: Context, email:String, name:String, dateStart: String, dateEnd: String, room:String){
@@ -36,7 +36,7 @@ class Email {
 
             val subject = context.getString(R.string.email_subject_reservation)
 
-            this.sendEmail(message, subject, email, name)
+            sendEmail(message, subject, email, name)
         }
 
         fun sendEmail(message: String, subject:String, email: String, name: String){

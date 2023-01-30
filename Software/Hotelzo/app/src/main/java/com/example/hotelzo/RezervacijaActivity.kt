@@ -1,19 +1,15 @@
 package com.example.hotelzo
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.hotelzo.roomViewer.RecyclerViewRoom
-import com.google.firebase.firestore.FieldValue
+import com.example.hotelzo.static_class.Email
 import com.google.firebase.firestore.FirebaseFirestore
-import java.lang.String.format
 import java.text.SimpleDateFormat
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import java.util.*
 
 class RezervacijaActivity : AppCompatActivity() {
@@ -25,6 +21,7 @@ class RezervacijaActivity : AppCompatActivity() {
     private var userName = ""
     private lateinit var email: String
 
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rezervacija)
@@ -94,6 +91,7 @@ class RezervacijaActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun addRezarvaciju(checkInTimestamp: Timestamp, checkOutTimestamp: Timestamp, ime: String, oznaka: String) {
         val dbReference = db.collection("Rezervacija")
         val newRezervacija = hashMapOf(
@@ -111,7 +109,6 @@ class RezervacijaActivity : AppCompatActivity() {
                 val end_date = dateFormat.format(checkOutTimestamp.toDate()).toString()
                 Email.sendReservationEmail(this, email, ime, start_date, end_date, oznaka)
 
-
                 Toast.makeText(this, getString(R.string.uspjesna_rez), Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, RecyclerViewRoom::class.java)
                 startActivity(intent)
@@ -120,7 +117,6 @@ class RezervacijaActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.greska), Toast.LENGTH_SHORT).show()
             }
     }
-
 
     private fun getCurrentUserName(callback: (String) -> Unit) {
         email = FirebaseAuth.getInstance().currentUser!!.email.toString()

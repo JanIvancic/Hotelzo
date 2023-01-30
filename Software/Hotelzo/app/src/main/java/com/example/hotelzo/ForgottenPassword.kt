@@ -9,9 +9,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 
 class ForgottenPassword : AppCompatActivity() {
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgotten_password)
@@ -25,24 +22,18 @@ class ForgottenPassword : AppCompatActivity() {
      btnForgottenPassword.setOnClickListener{
             val email= findViewById<EditText>(R.id.et_email).text.toString()
             if(email.isEmpty()){
-
-
                 Toast.makeText(this,
                     getString(R.string.toast_empty_mail), Toast.LENGTH_SHORT).show()
-            }else{
-
+            } else {
                 FirebaseAuth.getInstance().sendPasswordResetEmail(email)
                     .addOnSuccessListener(this){
-
                             Toast.makeText(this,
                                 getString(R.string.toast_existing_mail_forgotten_password), Toast.LENGTH_SHORT).show()
-
                             finish()
                     }.addOnFailureListener(this){
                         Toast.makeText(this,
                             getString(R.string.toast_non_existing_mail_forgotten_password), Toast.LENGTH_SHORT).show()
                     }
-
                 }
             }
         }

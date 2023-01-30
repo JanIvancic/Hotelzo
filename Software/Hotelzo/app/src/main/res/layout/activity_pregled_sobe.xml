@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_back_arrow" />
+        android:src="@drawable/ic_back_arrow"
+        android:contentDescription="@string/slika_desc" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -32,7 +33,7 @@
                 android:id="@+id/tv_oznaka_sobe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Oznaka sobe: "
+                android:text="@string/oznaka_sobe_pregled"
                 android:textSize="18sp"
                 android:layout_marginBottom="10dp"
                 android:textStyle="bold" />
@@ -43,7 +44,7 @@
                 android:id="@+id/tv_opis_sobe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Opis sobe: "
+                android:text="@string/opis_sobe_pregled"
                 android:textSize="16sp"
                 android:layout_marginBottom="10dp"
                 android:textStyle="italic" />
@@ -58,7 +59,7 @@
                     android:id="@+id/tv_cijena_sobe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cijena sobe: "
+                    android:text="@string/filter_price"
                     android:layout_marginBottom="10dp"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -79,7 +80,7 @@
                     android:id="@+id/tv_kapacitet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kapacitet: "
+                    android:text="@string/kapacitet"
                     android:layout_marginBottom="10dp"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -97,11 +98,9 @@
         android:id="@+id/btn_rezerviraj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rezerviraj"
+        android:text="@string/rezerviraj"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/top_bar"
-        android:textColor="@color/black"
-        />
-
+        android:textColor="@color/black" />
 </LinearLayout>

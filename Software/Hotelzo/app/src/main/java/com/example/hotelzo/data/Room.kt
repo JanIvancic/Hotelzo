@@ -1,4 +1,4 @@
-package com.example.hotelzo.roomViewer
+package com.example.hotelzo.data
 
 data class Room(
     val kratak_opis: String? = null,

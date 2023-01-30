@@ -71,11 +71,19 @@
     <string name="email_room_reserved">Uspješno ste rezervirali sobu</string>
     <string name="email_reservation_start">Početak rezervacije: </string>
     <string name="email_reservation_end">Kraj rezervacije: </string>
-    <string name="email_price">Cijena: </string>
     <string name="email_farewell">Lijep pozdrav,</string>
     <string name="your_reservation">Vaša rezervacija sobe</string>
     <string name="from">od</string>
     <string name="to">do</string>
     <string name="cancelled">Vaša rezervacija je uspješno otkazana.</string>
     <string name="email_subject_cancelled">Otkazana rezervacija</string>
+    <string name="prijava_admin">Prijavljeni ste kao admin</string>
+    <string name="prijava_greska">Neuspješna prijava</string>
+    <string name="oznaka_sobe_pregled">Oznaka sobe: </string>
+    <string name="opis_sobe_pregled">Opis sobe: </string>
+    <string name="hello_world">Hello World!</string>
+    <string name="kapacitet">Kapacitet:</string>
+    <string name="slika_desc">Slika</string>
+    <string name="room_description">Room Description</string>
+    <string name="prijedlog_cijene">$100</string>
 </resources>

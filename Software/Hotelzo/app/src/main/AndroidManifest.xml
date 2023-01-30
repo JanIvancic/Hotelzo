@@ -40,7 +40,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".roomViewer.RecyclerViewRoom" />
+        <activity android:name=".RecyclerViewRoom" />
         <activity
             android:name=".Registration"
             android:exported="false">

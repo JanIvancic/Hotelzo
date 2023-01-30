@@ -1,9 +1,9 @@
 package com.example.hotelzo
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 
 class PregledSobeActivity : AppCompatActivity() {
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pregled_sobe)
@@ -26,10 +27,10 @@ class PregledSobeActivity : AppCompatActivity() {
             .into(roomImage)
 
         val tvOznakaSobe = findViewById<TextView>(R.id.tv_oznaka_sobe)
-        tvOznakaSobe.text = "Oznaka sobe: $oznaka"
+        tvOznakaSobe.text = getString(R.string.oznaka_sobe_pregled) + " " + oznaka
 
         val tvOpisSobe = findViewById<TextView>(R.id.tv_opis_sobe)
-        tvOpisSobe.text = "Opis sobe: $opisSobe"
+        tvOpisSobe.text = getString(R.string.opis_sobe_pregled) + " " + opisSobe
 
         val tvCijenaSobe = findViewById<TextView>(R.id.tv_cijena_sobe_value)
         tvCijenaSobe.text = cijenaSobe.toString()
@@ -47,8 +48,6 @@ class PregledSobeActivity : AppCompatActivity() {
             finish()
         }
     }
-
-
 }
 
 

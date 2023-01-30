@@ -20,7 +20,7 @@ class RezervacijaAdmin : AppCompatActivity() {
     private var checkInTimestamp: Timestamp? = null
     private var checkOutTimestamp: Timestamp? = null
 
-
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rezervacija_admin)
@@ -36,7 +36,6 @@ class RezervacijaAdmin : AppCompatActivity() {
         val btnBack = findViewById<ImageView>(R.id.back_arrow)
         val oznakeArray = ArrayList<String>()
 
-
         db.collection("Soba").get().addOnSuccessListener { result ->
             for (document in result) {
                 val oznaka = document.get("oznaka").toString()
@@ -47,7 +46,6 @@ class RezervacijaAdmin : AppCompatActivity() {
         btnBack.setOnClickListener{
             finish()
         }
-
 
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val selectedDate = Calendar.getInstance()
@@ -72,8 +70,6 @@ class RezervacijaAdmin : AppCompatActivity() {
             checkOutDateTextView.text = ""
         }
 
-
-
         btn_rezerviraj.setOnClickListener {
             oznaka = findViewById<EditText>(R.id.et_oznaka_sobe).text.toString()
             name = findViewById<EditText>(R.id.et_ime_prezime).text.toString()
@@ -92,7 +88,6 @@ class RezervacijaAdmin : AppCompatActivity() {
                     ).show()
                 }
             } else {
-                Log.d("checkFor", "${name}, ${oznaka}")
                 if (oznaka.isBlank() || name.isBlank()){
                     Toast.makeText(this, getString(R.string.register_empty_field), Toast.LENGTH_SHORT).show()
                     }else if(!oznakeArray.contains(oznaka)){
@@ -130,10 +125,7 @@ class RezervacijaAdmin : AppCompatActivity() {
             }
     }
 
-
-
-
-
+    @SuppressLint("SuspiciousIndentation")
     private fun checkForReservationConflict(checkInTimestamp: Timestamp, checkOutTimestamp: Timestamp, oznaka: String, name: String ) {
         var conflictFound = false
 
@@ -173,6 +165,5 @@ class RezervacijaAdmin : AppCompatActivity() {
                         Toast.makeText(this, getString(R.string.greska_postojecih_rezervacija), Toast.LENGTH_SHORT).show()
                     }
             }
-
     }
 }

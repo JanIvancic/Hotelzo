@@ -35,7 +35,6 @@ class ReservationsAdapter(private val reservationList: ArrayList<Reservations>, 
         return reservationViewHolder(itemView)
     }
 
-
     override fun onBindViewHolder(holder: reservationViewHolder, position: Int) {
         holder.tvName.text = reservationList[position].name
         holder.tvRoomLabel.text = reservationList[position].room_label
@@ -51,9 +50,6 @@ class ReservationsAdapter(private val reservationList: ArrayList<Reservations>, 
             holder.ivDeleteButton.visibility = View.GONE
         }
     }
-
-
-
 
     override fun getItemCount(): Int {
         return reservationList.size
