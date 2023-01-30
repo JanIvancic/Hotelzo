@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/top_bar_back"
+        layout="@layout/top_bar_back">
+    </include>
+
+    <CalendarView
+        android:id="@+id/calendar_view"
+        android:layout_width="match_parent"
+        android:layout_height="295dp"
+        android:dateTextAppearance="@android:style/TextAppearance.Large"
+        android:firstDayOfWeek="0"
+        android:maxDate="01/01/2030"
+        android:minDate="01/01/2020"
+        android:weekDayTextAppearance="@android:style/TextAppearance.Medium" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-3dp"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/ime_prezime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ime_prezime"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_ime_prezime"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="-8dp"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:layout_marginStart="-3dp">
+
+        <TextView
+            android:id="@+id/oznaka_sobe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/oznaka_sobe"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_oznaka_sobe"
+        android:layout_marginTop="-8dp"
+            android:layout_width="200dp"
+            android:layout_marginStart="30dp"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/dolazak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/datum_dolaska"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_check_in_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="@integer/material_motion_duration_long_1"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/removePrvi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/obrisi"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="right"
+            android:onClick="removeCheckInDate"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/datum_odlaska"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:id="@+id/odlazak"/>
+
+        <TextView
+            android:id="@+id/tv_check_out_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="@integer/material_motion_duration_long_1"
+
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/removeDrugi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/obrisi"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="end"
+            android:onClick="removeCheckOutDate"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_rezerviraj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="@string/rezerviraj"
+        android:textSize="18sp"
+        android:backgroundTint="@color/top_bar"
+        android:textColor="@color/black"/>
+</LinearLayout>

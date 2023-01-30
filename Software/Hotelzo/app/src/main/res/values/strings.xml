@@ -62,5 +62,8 @@
     <string name="datum_dolaska">Datum dolaska:</string>
     <string name="obrisi">Obriši</string>
     <string name="datum_odlaska">Datum odlaska:</string>
+    <string name="ime_prezime">Ime i prezime:</string>
+    <string name="oznaka_sobe">Oznaka sobe:</string>
+    <string name="toast_postojeca_oznaka">Unesite sobu s postojećom oznakom</string>
 
 </resources>
