@@ -23,6 +23,7 @@ class RezervacijaActivity : AppCompatActivity() {
     private var checkInTimestamp: Timestamp? = null
     private var checkOutTimestamp: Timestamp? = null
     private var userName = ""
+    private lateinit var email: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,6 +104,14 @@ class RezervacijaActivity : AppCompatActivity() {
         )
         dbReference.add(newRezervacija)
             .addOnSuccessListener {
+
+                //Mladen Kajic
+                val dateFormat = SimpleDateFormat("dd.MM.yyyy")
+                val start_date = dateFormat.format(checkInTimestamp.toDate()).toString()
+                val end_date = dateFormat.format(checkOutTimestamp.toDate()).toString()
+                Email.sendReservationEmail(this, email, ime, start_date, end_date, oznaka)
+
+
                 Toast.makeText(this, getString(R.string.uspjesna_rez), Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, RecyclerViewRoom::class.java)
                 startActivity(intent)
@@ -114,7 +123,7 @@ class RezervacijaActivity : AppCompatActivity() {
 
 
     private fun getCurrentUserName(callback: (String) -> Unit) {
-        val email = FirebaseAuth.getInstance().currentUser!!.email
+        email = FirebaseAuth.getInstance().currentUser!!.email.toString()
         var ime: String = ""
 
         db.collection("Korisnik")

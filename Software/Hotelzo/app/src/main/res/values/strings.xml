@@ -66,4 +66,16 @@
     <string name="oznaka_sobe">Oznaka sobe:</string>
     <string name="toast_postojeca_oznaka">Unesite sobu s postojećom oznakom</string>
 
+    <string name="email_subject_reservation">Rezervacija sobe</string>
+    <string name="email_greeting">Poštovani</string>
+    <string name="email_room_reserved">Uspješno ste rezervirali sobu</string>
+    <string name="email_reservation_start">Početak rezervacije: </string>
+    <string name="email_reservation_end">Kraj rezervacije: </string>
+    <string name="email_price">Cijena: </string>
+    <string name="email_farewell">Lijep pozdrav,</string>
+    <string name="your_reservation">Vaša rezervacija sobe</string>
+    <string name="from">od</string>
+    <string name="to">do</string>
+    <string name="cancelled">Vaša rezervacija je uspješno otkazana.</string>
+    <string name="email_subject_cancelled">Otkazana rezervacija</string>
 </resources>
