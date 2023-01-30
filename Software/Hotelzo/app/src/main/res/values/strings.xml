@@ -76,6 +76,6 @@
     <string name="your_reservation">Vaša rezervacija sobe</string>
     <string name="from">od</string>
     <string name="to">do</string>
-    <string name="cancelled">je otkazana.</string>
+    <string name="cancelled">Vaša rezervacija je uspješno otkazana.</string>
     <string name="email_subject_cancelled">Otkazana rezervacija</string>
 </resources>

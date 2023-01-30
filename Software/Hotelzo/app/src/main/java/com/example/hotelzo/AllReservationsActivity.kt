@@ -95,6 +95,8 @@ class AllReservationsActivity : AppCompatActivity() {
                             finish()
                         }
 
+
+
                     }
                 }
             }
@@ -104,6 +106,7 @@ class AllReservationsActivity : AppCompatActivity() {
         val dohvaceniId = db.collection("Rezervacija").document(id!!)
         dohvaceniId.delete()
             .addOnSuccessListener {
+                sendDeletionMail()
                 Log.d("Uspjesno", "Rezervacija ($id) je uspjesno izbrisana")
             }
             .addOnFailureListener { exception ->
@@ -205,5 +208,21 @@ class AllReservationsActivity : AppCompatActivity() {
         }
 
         recyclerView.adapter = ReservationsAdapter(reservationList, this,gumb,uloga)
+    }
+
+    private fun sendDeletionMail() {
+        val email = FirebaseAuth.getInstance().currentUser!!.email
+        db.collection("Korisnik")
+            .whereEqualTo("mail", email)
+            .get()
+            .addOnSuccessListener {
+                if (!it.isEmpty) {
+                    val uloga = it.documents[0]["uloga"].toString()
+                    if(uloga == "gost"){
+                        val ime = it.documents[0]["ime"].toString()
+                        Email.sendCancelationEmail(this, email!!, ime)
+                    }
+                }
+            }
     }
 }
