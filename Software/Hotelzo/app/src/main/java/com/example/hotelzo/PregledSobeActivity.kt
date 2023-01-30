@@ -1,5 +1,6 @@
 package com.example.hotelzo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -38,7 +39,9 @@ class PregledSobeActivity : AppCompatActivity() {
 
         val gumbRezerviraj = findViewById<Button>(R.id.btn_rezerviraj)
         gumbRezerviraj.setOnClickListener {
-            //započni rezervaciju
+            val intent = Intent(this, RezervacijaActivity::class.java)
+            intent.putExtra("oznaka", oznaka)
+            startActivity(intent)
         }
         btnBack.setOnClickListener{
             finish()

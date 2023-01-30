@@ -32,6 +32,7 @@
     <string name="instructions_input_email">Unesite vašu email adresu</string>
     <string name="register_error">Neuspješna registracija</string>
     <string name="guest_role">gost</string>
+    <string name="rezerviraj">Rezerviraj</string>
 
     <string name="pricekajte">Pričekajte</string>
     <string name="prijava_u_tijeku">Prijava u tijeku</string>
@@ -49,5 +50,17 @@
     <string name="past_reservations">Prijašnje</string>
     <string name="reservations">Rezervacije</string>
     <string name="content_description_gumb_za_brisanje">Gumb za brisanje</string>
+    <string name="oznaka">oznaka</string>
+    <string name="odabir_datuma">Molim vas izaberite datum dolaska i odlaska.</string>
+    <string name="odabir_dolaska">Molim vas izaberite datum dolaska.</string>
+    <string name="odabir_odlaska">Molim vas izaberite datum odlaska.</string>
+    <string name="uspjesna_rez">Rezervacija uspješno kreirana</string>
+    <string name="greska_dolazak_trenutni_datum">Datum dolaska ne može biti prije trenutnog datuma.</string>
+    <string name="greska_odlazak_dolazak">Datum odlaska ne može biti prije datuma dolaska.</string>
+    <string name="posotji_rezervacija_datum">Već postoji rezervacija za odabrani datum. Molimo odaberite drugi datum.</string>
+    <string name="greska_postojecih_rezervacija">Pogreška pri dohvaćanju postojećih rezervacija. Molimo pokušajte ponovno.</string>
+    <string name="datum_dolaska">Datum dolaska:</string>
+    <string name="obrisi">Obriši</string>
+    <string name="datum_odlaska">Datum odlaska:</string>
 
 </resources>
