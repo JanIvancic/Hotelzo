@@ -54,6 +54,14 @@ class AllReservationsActivity : AppCompatActivity() {
             gumb=!isChecked
             getLoggedInUserInfo()
         }
+
+
+        val btnNewReservation = findViewById<ImageView>(R.id.btnAdd)
+
+        btnNewReservation.setOnClickListener{
+            val intent = Intent(this, RezervacijaAdmin::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun hideBar() {
@@ -188,7 +196,7 @@ class AllReservationsActivity : AppCompatActivity() {
             val end_date = dateFormat.format(timestamp.toDate())
 
             val name:String = data["ime"].toString()
-            val room_label:String = data["oznaka_sobe"].toString()
+            val room_label:String = data["oznaka"].toString()
 
             val id : String = data.id
 
