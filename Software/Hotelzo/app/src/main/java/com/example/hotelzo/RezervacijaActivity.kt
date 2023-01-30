@@ -3,10 +3,7 @@ package com.example.hotelzo
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.CalendarView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hotelzo.roomViewer.RecyclerViewRoom
 import com.google.firebase.firestore.FieldValue
@@ -37,8 +34,12 @@ class RezervacijaActivity : AppCompatActivity() {
         val removePrvi = findViewById<TextView>(R.id.removePrvi)
         val removeDrugi = findViewById<TextView>(R.id.removeDrugi)
         val calendarView = findViewById<CalendarView>(R.id.calendar_view)
-        val oznaka = intent.getStringExtra("oznaka")
+        val oznaka = intent.getStringExtra(getString(R.string.oznaka))
+        val btnBack = findViewById<ImageView>(R.id.back_arrow)
 
+        btnBack.setOnClickListener{
+            finish()
+        }
         if (oznaka != null) {
             setUpReservationButton(oznaka)
         }
@@ -74,15 +75,15 @@ class RezervacijaActivity : AppCompatActivity() {
             if (checkInTimestamp == null || checkOutTimestamp == null) {
                 if (checkInTimestamp == null && checkOutTimestamp == null) {
                     Toast.makeText(
-                        this, "Molim vas izaberite datum dolaska i odlaska.", Toast.LENGTH_SHORT
+                        this, getString(R.string.odabir_datuma), Toast.LENGTH_SHORT
                     ).show()
                 } else if (checkInTimestamp == null) {
                     Toast.makeText(
-                        this, "Molim vas izaberite datum dolaska.", Toast.LENGTH_SHORT
+                        this, getString(R.string.odabir_dolaska), Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     Toast.makeText(
-                        this, "Molim vas izaberite datum odlaska.", Toast.LENGTH_SHORT
+                        this, getString(R.string.odabir_odlaska), Toast.LENGTH_SHORT
                     ).show()
                 }
             } else {
@@ -94,7 +95,6 @@ class RezervacijaActivity : AppCompatActivity() {
 
     private fun addRezarvaciju(checkInTimestamp: Timestamp, checkOutTimestamp: Timestamp, ime: String, oznaka: String) {
         val dbReference = db.collection("Rezervacija")
-        Log.d("REZIME", ime)
         val newRezervacija = hashMapOf(
             "datum_kraj" to checkOutTimestamp,
             "datum_pocetak" to checkInTimestamp,
@@ -103,12 +103,12 @@ class RezervacijaActivity : AppCompatActivity() {
         )
         dbReference.add(newRezervacija)
             .addOnSuccessListener {
-                Toast.makeText(this, "Rezervacija uspješno kreirana", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.uspjesna_rez), Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, RecyclerViewRoom::class.java)
                 startActivity(intent)
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Greška: $e", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.greska), Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -123,7 +123,6 @@ class RezervacijaActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 if (!it.isEmpty) {
                     ime = it.documents[0]["ime"].toString()
-                    Log.d("ime", ime)
                     callback(ime)
                 }
             }
@@ -133,10 +132,10 @@ class RezervacijaActivity : AppCompatActivity() {
         var conflictFound = false
         getCurrentUserName { name ->
             if (checkInTimestamp.toDate().before(Date())) {
-                Toast.makeText(this, "Datum dolaska ne može biti prije trenutnog datuma.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.greska_dolazak_trenutni_datum), Toast.LENGTH_SHORT).show()
                 conflictFound = true
             } else if (checkOutTimestamp.toDate().before(checkInTimestamp.toDate())) {
-                Toast.makeText(this, "Datum odlaska ne može biti prije datuma dolaska.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.greska_odlazak_dolazak), Toast.LENGTH_SHORT).show()
                 conflictFound = true
             }
 
@@ -145,16 +144,16 @@ class RezervacijaActivity : AppCompatActivity() {
                     .get()
                     .addOnSuccessListener { documents ->
                         for (document in documents) {
-                            if (document.getString("oznaka_sobe") != oznaka) {
+                            if (document.getString("oznaka") != oznaka) {
                                 continue
                             }
                             val existingCheckInTimestamp = document.getTimestamp("datum_pocetak")
                             val existingCheckOutTimestamp = document.getTimestamp("datum_kraj")
                             if ((checkInTimestamp.toDate().after(existingCheckInTimestamp!!.toDate()) && checkInTimestamp.toDate().before(existingCheckOutTimestamp!!.toDate())) ||
                                 (checkOutTimestamp.toDate().after(existingCheckInTimestamp.toDate()) && checkOutTimestamp.toDate().before(existingCheckOutTimestamp!!.toDate())) ||
-                                (checkInTimestamp.toDate().equals(existingCheckInTimestamp.toDate())) || (checkOutTimestamp.toDate().equals(existingCheckOutTimestamp!!.toDate()))) {
+                                (checkInTimestamp.toDate().before(existingCheckOutTimestamp!!.toDate()) && checkOutTimestamp.toDate().after(existingCheckInTimestamp.toDate()))) {
                                 Toast.makeText(
-                                    this, "Već postoji rezervacija za odabrani datum. Molimo odaberite drugi datum.", Toast.LENGTH_SHORT
+                                    this, getString(R.string.posotji_rezervacija_datum), Toast.LENGTH_SHORT
                                 ).show()
                                 conflictFound = true
                                 break
@@ -165,11 +164,9 @@ class RezervacijaActivity : AppCompatActivity() {
                         }
                     }
                     .addOnFailureListener {
-                        Toast.makeText(this, "Pogreška pri dohvaćanju postojećih rezervacija. Molimo pokušajte ponovno.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.greska_postojecih_rezervacija), Toast.LENGTH_SHORT).show()
                     }
             }
         }
     }
-
-
 }

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:dateTextAppearance="@android:style/TextAppearance.Large"
-        android:firstDayOfWeek="1"
+        android:firstDayOfWeek="0"
         android:maxDate="01/01/2030"
         android:minDate="01/01/2020"
         android:weekDayTextAppearance="@android:style/TextAppearance.Medium" />
@@ -26,7 +26,7 @@
             android:id="@+id/dolazak"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Datum dolaska: "
+            android:text="@string/datum_dolaska"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -40,7 +40,7 @@
             android:id="@+id/removePrvi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Obriši"
+            android:text="@string/obrisi"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_gravity="right"
@@ -57,7 +57,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Datum odlaska: "
+            android:text="@string/datum_odlaska"
             android:textSize="18sp"
             android:textStyle="bold"
             android:id="@+id/odlazak"/>
@@ -73,7 +73,7 @@
             android:id="@+id/removeDrugi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Obriši"
+            android:text="@string/obrisi"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_gravity="end"
