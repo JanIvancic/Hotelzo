@@ -4,9 +4,9 @@
 
 Ime i prezime | E-mail adresa (FOI) | JMBAG | Github korisničko ime | Seminarska grupa
 ------------  | ------------------- | ----- | --------------------- | ----------------
-Mladen Kajić | mkajic20@student.foi.hr | 0016147999 | mkajic20 | IPS3-S-G1.1
-Luka Galjer | lgaljer20@student.foi.hr | 0016148489 | lgaljer20 | IPS3-S-G1.1
-Jan Ivančić | jivancic20@student.foi.hr | 0016150494 | jivancic20 | IPS3-S-G1.1
+Mladen Kajić | mkajic20@student.foi.hr | ********** | mkajic20 | IPS3-S-G1.1
+Luka Galjer | lgaljer20@student.foi.hr | ********** | lgaljer20 | IPS3-S-G1.1
+Jan Ivančić | jivancic20@student.foi.hr | ********** | jivancic20 | IPS3-S-G1.1
 
 ## Opis domene
 
